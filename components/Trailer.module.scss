@@ -1,0 +1,20 @@
+.header {
+}
+
+.play {
+  .blob {
+    transition: transform 0.2s 0.1s ease-in-out;
+  }
+  .icon {
+    transition: transform 0.2s 0s ease-in-out;
+  }
+
+  &:hover {
+    .blob {
+      transform: scale(1.1);
+    }
+    .icon {
+      transform: scale(1.1);
+    }
+  }
+}

@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+@font-face {
+  font-family: "foo";
+  src: url("../public/fonts/foo.otf") format("truetype");
+}
+
+.fooFont {
+  font-family: "foo";
+}
+
+.Montserrat {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+}
+
+.hover-animation {
+  .arrow {
+    transition: all 0.3s;
+  }
+  &:hover {
+    .arrow {
+      transform: translateX(5px);
+    }
+  }
+}
+
+.item {
+  transition: transform 0.1s;
+  &:hover {
+    transform: rotate(2deg) !important;
+  }
+}
+
+.button {
+  animation: bounce 2s linear infinite;
+  @keyframes bounce {
+    0% {
+      transform: scale(1) translateX(0);
+    }
+    40% {
+      transform: scale(0.8, 1.2) translateX(-10px);
+    }
+    50% {
+      transform: scale(1.2, 0.8) translateX(-6px);
+    }
+    60% {
+      transform: scale(0.9, 1.1) translateX(-4.5px);
+    }
+    70% {
+      transform: scale(1.05, 0.95) translateX(-2.5px);
+    }
+    80% {
+      transform: scale(0.98, 1.02) translateX(-1px);
+    }
+    90% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1) translateX(0);
+    }
+  }
+}
