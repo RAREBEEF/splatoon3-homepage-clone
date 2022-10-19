@@ -46,15 +46,15 @@ const NewsList: Array<{ thumb: StaticImageData; content: string }> = [
 ];
 
 const News = () => {
-  const swipeContainerRef = useRef<HTMLUListElement>(null);
-  const swipeItemRefs = useRef<Array<any>>([]);
+  const slideContainerRef = useRef<HTMLUListElement>(null);
+  const slideItemRefs = useRef<Array<any>>([]);
   const [page, setPage] = useState<number>(0);
   const [showLeftButton, setShowLeftButton] = useState<boolean>(false);
   const [showRightButton, setShowRightButton] = useState<boolean>(true);
 
   const itemAnimation = (
     el: HTMLUListElement | EventTarget,
-    reverse: boolean = false
+    reverse: boolean
   ) => {
     let random = Math.floor(Math.random() * (24 - 8) + 8);
 
@@ -67,29 +67,22 @@ const News = () => {
       duration: 0,
       ease: Power1.easeInOut,
     });
-    timeline.to(el, {
-      rotate: (reverse ? "" : "-") + random + "deg",
-      duration: 0.25,
-      ease: Power1.easeInOut,
-    });
-    random *= 2 / 3;
-    timeline.to(el, {
-      rotate: (reverse ? "-" : "") + random + "deg",
-      duration: 0.25,
-      ease: Power1.easeInOut,
-    });
-    random *= 2 / 3;
-    timeline.to(el, {
-      rotate: (reverse ? "" : "-") + random + "deg",
-      duration: 0.25,
-      ease: Power1.easeInOut,
-    });
-    random *= 2 / 3;
-    timeline.to(el, {
-      rotate: (reverse ? "-" : "") + random + "deg",
-      duration: 0.25,
-      ease: Power1.easeInOut,
-    });
+
+    for (let i = 0; i < 3; i++) {
+      random *= 2 / 3;
+      timeline.to(el, {
+        rotate: (reverse ? "" : "-") + random + "deg",
+        duration: 0.25,
+        ease: Power1.easeInOut,
+      });
+      random *= 2 / 3;
+      timeline.to(el, {
+        rotate: (reverse ? "-" : "") + random + "deg",
+        duration: 0.25,
+        ease: Power1.easeInOut,
+      });
+    }
+
     timeline.to(el, {
       rotate: 0,
       duration: 0.25,
@@ -103,7 +96,7 @@ const News = () => {
       items.push(
         <li
           key={i}
-          ref={(el) => (swipeItemRefs.current[i] = el)}
+          ref={(el) => (slideItemRefs.current[i] = el)}
           className={classNames(
             styles.item,
             "relative cursor-pointer flex flex-col justify-around mx-[2%] shrink-0 bg-white w-[46%] px-[5%] pb-[6%] rounded-b-xl origin-top sm:w-[96%] sm:max-w-none sm:pb-[15%]"
@@ -118,7 +111,7 @@ const News = () => {
               <path
                 d="M253.96 23.774a4.711 4.711 0 0 1-4.693 4.328h-49.535c-.131 0-.255-.027-.384-.038-2.431-.198-4.348-2.205-4.348-4.68a4.724 4.724 0 0 1 4.732-4.716h18.204c-.006-.106-.017-.21-.017-.315 0-3.452 2.808-6.25 6.27-6.25h.62a6.26 6.26 0 0 1 5.038 2.54 6.194 6.194 0 0 1 1.233 3.71c0 .106-.01.21-.016.315H249.267c2.614 0 4.733 2.111 4.733 4.717 0 .133-.029.258-.04.389M53.446.102H9.693C4.34.102 0 4.437 0 9.782v50.044h448V9.783c0-5.346-4.338-9.68-9.693-9.68H53.445Z"
                 fill="#FFF"
-                fill-rule="evenodd"
+                fillRule="evenodd"
               ></path>
             </svg>
           </div>
@@ -201,26 +194,27 @@ const News = () => {
   };
 
   /**
-   * 스와이프 페이지에 맞춰 스크롤 업데이트
+   * 슬라이드 페이지에 맞춰 스크롤 업데이트
    */
   const scrollUpdate = useCallback(() => {
-    const swipeContainer = swipeContainerRef.current;
-    if (!swipeContainer || !window) return;
+    const slideContainer = slideContainerRef.current;
+    if (!slideContainer || !window) return;
 
     const innerWidth = window.innerWidth;
+    const currentX = slideContainer.scrollLeft;
     const moveX =
       (window.innerWidth / 100) *
       (innerWidth < 640 ? 90 : innerWidth < 1024 ? 75 : 60);
 
     const nextX = moveX * page;
 
-    swipeContainer.scrollTo({
+    slideContainer.scrollTo({
       left: nextX,
       behavior: "smooth",
     });
 
-    swipeItemRefs.current.forEach((el) => {
-      itemAnimation(el);
+    slideItemRefs.current.forEach((el) => {
+      itemAnimation(el, currentX > nextX);
     });
   }, [page]);
 
@@ -273,53 +267,55 @@ const News = () => {
       </div>
 
       <ul
-        ref={swipeContainerRef}
+        ref={slideContainerRef}
         className="pt-[10%] pb-[10%] px-[20%] flex overflow-hidden w-screen min-w-[320px] md:px-[12.5%] md:pt-[15%] sm:px-[5%] sm:pt-[25%]"
       >
         {slideItems()}
       </ul>
 
-      <div className="absolute pointer-events-none top-0 bottom-0 my-auto pt-[15%] w-full flex justify-between items-center">
+      <div className="absolute pointer-events-none top-0 bottom-0 my-auto pt-[10%] w-full flex justify-between items-center md:pt-[20%] sm:pt-[25%]">
         <div className="hover:scale-[1.2]">
-          {showLeftButton && (
-            <button
-              onClick={onLeftClick}
-              className={classNames(
-                styles.button,
-                "relative w-[85px] h-[85px] p-[20px] m-[20px] bg-mint rounded-full pointer-events-auto md:w-[50px] md:h-[50px] md:p-[10px]"
-              )}
-            >
-              <div>
-                <svg aria-hidden="true" role="img" viewBox="0 0 40 40">
-                  <path
-                    fill="#000"
-                    d="M35.718 7.193a1.464 1.464 0 0 1-2.058 0l-.856-.853a1.464 1.464 0 0 0-2.058 0l-.9.896a1.464 1.464 0 0 1-2.058 0l-.9-.896a1.464 1.464 0 0 0-2.058 0l-.735.732a1.464 1.464 0 0 1-2.058 0l-.762-.758a1.45 1.45 0 0 1 0-2.05l.9-.896a1.45 1.45 0 0 0 0-2.049l-.9-.896a1.464 1.464 0 0 0-2.058 0L.424 19.139a1.45 1.45 0 0 0 0 2.049L18.89 39.577a1.463 1.463 0 0 0 2.057 0l.9-.896a1.45 1.45 0 0 0 0-2.05l-.9-.895a1.45 1.45 0 0 1 0-2.05l.883-.879a1.464 1.464 0 0 1 2.057 0l.9.897a1.464 1.464 0 0 0 2.058 0l.9-.897a1.464 1.464 0 0 1 2.058 0l.9.897a1.465 1.465 0 0 0 2.058 0l.9-.896a1.463 1.463 0 0 1 2.057 0l.9.896a1.464 1.464 0 0 0 2.057 0l.9-.897a1.45 1.45 0 0 0 0-2.05l-3.857-3.841a1.45 1.45 0 0 1 0-2.05l3.858-3.841a1.45 1.45 0 0 0 0-2.05l-.699-.695-1.13-1.125-1.129-1.125-.9-.896a1.45 1.45 0 0 1 0-2.05l3.858-3.842a1.45 1.45 0 0 0 0-2.049l-.9-.896a1.463 1.463 0 0 0-2.058 0l-.9.896Z"
-                  ></path>
-                </svg>
-              </div>
-            </button>
-          )}
+          <button
+            onClick={onLeftClick}
+            className={classNames(
+              styles.button,
+              "relative w-[85px] h-[85px] p-[20px] m-[20px] bg-mint rounded-full md:w-[50px] md:h-[50px] md:p-[10px]",
+              showLeftButton
+                ? "opacity-100 pointer-events-auto"
+                : "pointer-events-none opacity-0 cursor-default"
+            )}
+          >
+            <div>
+              <svg aria-hidden="true" role="img" viewBox="0 0 40 40">
+                <path
+                  fill="#000"
+                  d="M35.718 7.193a1.464 1.464 0 0 1-2.058 0l-.856-.853a1.464 1.464 0 0 0-2.058 0l-.9.896a1.464 1.464 0 0 1-2.058 0l-.9-.896a1.464 1.464 0 0 0-2.058 0l-.735.732a1.464 1.464 0 0 1-2.058 0l-.762-.758a1.45 1.45 0 0 1 0-2.05l.9-.896a1.45 1.45 0 0 0 0-2.049l-.9-.896a1.464 1.464 0 0 0-2.058 0L.424 19.139a1.45 1.45 0 0 0 0 2.049L18.89 39.577a1.463 1.463 0 0 0 2.057 0l.9-.896a1.45 1.45 0 0 0 0-2.05l-.9-.895a1.45 1.45 0 0 1 0-2.05l.883-.879a1.464 1.464 0 0 1 2.057 0l.9.897a1.464 1.464 0 0 0 2.058 0l.9-.897a1.464 1.464 0 0 1 2.058 0l.9.897a1.465 1.465 0 0 0 2.058 0l.9-.896a1.463 1.463 0 0 1 2.057 0l.9.896a1.464 1.464 0 0 0 2.057 0l.9-.897a1.45 1.45 0 0 0 0-2.05l-3.857-3.841a1.45 1.45 0 0 1 0-2.05l3.858-3.841a1.45 1.45 0 0 0 0-2.05l-.699-.695-1.13-1.125-1.129-1.125-.9-.896a1.45 1.45 0 0 1 0-2.05l3.858-3.842a1.45 1.45 0 0 0 0-2.049l-.9-.896a1.463 1.463 0 0 0-2.058 0l-.9.896Z"
+                ></path>
+              </svg>
+            </div>
+          </button>
         </div>
 
         <div className="rotate-180 hover:scale-[1.2]">
-          {showRightButton && (
-            <button
-              onClick={onRightClick}
-              className={classNames(
-                styles.button,
-                "relative w-[85px] h-[85px] p-[20px] m-[20px] bg-mint rounded-full pointer-events-auto md:w-[50px] md:h-[50px] md:p-[10px]"
-              )}
-            >
-              <div>
-                <svg aria-hidden="true" role="img" viewBox="0 0 40 40">
-                  <path
-                    fill="#000"
-                    d="M35.718 7.193a1.464 1.464 0 0 1-2.058 0l-.856-.853a1.464 1.464 0 0 0-2.058 0l-.9.896a1.464 1.464 0 0 1-2.058 0l-.9-.896a1.464 1.464 0 0 0-2.058 0l-.735.732a1.464 1.464 0 0 1-2.058 0l-.762-.758a1.45 1.45 0 0 1 0-2.05l.9-.896a1.45 1.45 0 0 0 0-2.049l-.9-.896a1.464 1.464 0 0 0-2.058 0L.424 19.139a1.45 1.45 0 0 0 0 2.049L18.89 39.577a1.463 1.463 0 0 0 2.057 0l.9-.896a1.45 1.45 0 0 0 0-2.05l-.9-.895a1.45 1.45 0 0 1 0-2.05l.883-.879a1.464 1.464 0 0 1 2.057 0l.9.897a1.464 1.464 0 0 0 2.058 0l.9-.897a1.464 1.464 0 0 1 2.058 0l.9.897a1.465 1.465 0 0 0 2.058 0l.9-.896a1.463 1.463 0 0 1 2.057 0l.9.896a1.464 1.464 0 0 0 2.057 0l.9-.897a1.45 1.45 0 0 0 0-2.05l-3.857-3.841a1.45 1.45 0 0 1 0-2.05l3.858-3.841a1.45 1.45 0 0 0 0-2.05l-.699-.695-1.13-1.125-1.129-1.125-.9-.896a1.45 1.45 0 0 1 0-2.05l3.858-3.842a1.45 1.45 0 0 0 0-2.049l-.9-.896a1.463 1.463 0 0 0-2.058 0l-.9.896Z"
-                  ></path>
-                </svg>
-              </div>
-            </button>
-          )}
+          <button
+            onClick={onRightClick}
+            className={classNames(
+              styles.button,
+              "relative w-[85px] h-[85px] p-[20px] m-[20px] bg-mint rounded-full md:w-[50px] md:h-[50px] md:p-[10px]",
+              showRightButton
+                ? "opacity-100 pointer-events-auto"
+                : "pointer-events-none opacity-0 cursor-default"
+            )}
+          >
+            <div>
+              <svg aria-hidden="true" role="img" viewBox="0 0 40 40">
+                <path
+                  fill="#000"
+                  d="M35.718 7.193a1.464 1.464 0 0 1-2.058 0l-.856-.853a1.464 1.464 0 0 0-2.058 0l-.9.896a1.464 1.464 0 0 1-2.058 0l-.9-.896a1.464 1.464 0 0 0-2.058 0l-.735.732a1.464 1.464 0 0 1-2.058 0l-.762-.758a1.45 1.45 0 0 1 0-2.05l.9-.896a1.45 1.45 0 0 0 0-2.049l-.9-.896a1.464 1.464 0 0 0-2.058 0L.424 19.139a1.45 1.45 0 0 0 0 2.049L18.89 39.577a1.463 1.463 0 0 0 2.057 0l.9-.896a1.45 1.45 0 0 0 0-2.05l-.9-.895a1.45 1.45 0 0 1 0-2.05l.883-.879a1.464 1.464 0 0 1 2.057 0l.9.897a1.464 1.464 0 0 0 2.058 0l.9-.897a1.464 1.464 0 0 1 2.058 0l.9.897a1.465 1.465 0 0 0 2.058 0l.9-.896a1.463 1.463 0 0 1 2.057 0l.9.896a1.464 1.464 0 0 0 2.057 0l.9-.897a1.45 1.45 0 0 0 0-2.05l-3.857-3.841a1.45 1.45 0 0 1 0-2.05l3.858-3.841a1.45 1.45 0 0 0 0-2.05l-.699-.695-1.13-1.125-1.129-1.125-.9-.896a1.45 1.45 0 0 1 0-2.05l3.858-3.842a1.45 1.45 0 0 0 0-2.049l-.9-.896a1.463 1.463 0 0 0-2.058 0l-.9.896Z"
+                ></path>
+              </svg>
+            </div>
+          </button>
         </div>
       </div>
     </article>

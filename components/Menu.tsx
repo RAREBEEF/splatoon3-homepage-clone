@@ -2,6 +2,7 @@ import Image from "next/image";
 import nintendo from "../public/images/nintendo.svg";
 import paint from "../public/images/menu-paint.svg";
 import menu from "../public/images/menu.svg";
+import Link from "next/link";
 
 const Menu = () => {
   return (
@@ -10,9 +11,15 @@ const Menu = () => {
         <Image src={paint} alt="Paint" />
       </div>
       <div>
-        <div className="absolute right-0 w-[7%] min-w-[60px] text-right">
-          <Image src={nintendo} alt="Nintendo Switch" />
-        </div>
+        <Link href="https://www.nintendo.com/switch/">
+          <a
+            target="_blank"
+            rel="noreferrer"
+            className="absolute right-0 w-[7%] min-w-[60px] text-right"
+          >
+            <Image src={nintendo} alt="Nintendo Switch" />
+          </a>
+        </Link>
         <button className="absolute h-[50px] top-10 left-2 flex items-center text-white">
           <svg
             className="h-[70px]"
