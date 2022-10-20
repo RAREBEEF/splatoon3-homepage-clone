@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+@font-face {
+  font-family: "foo";
+  src: url("../public/fonts/foo.otf") format("truetype");
+}
+
+.fooFont {
+  font-family: "foo";
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -13,5 +23,9 @@ a {
 
 html {
   overflow-x: hidden;
-  min-width: 320px;
+  min-width: 350px;
+}
+
+.container-none {
+  min-width: 350px;
 }

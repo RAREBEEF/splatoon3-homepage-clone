@@ -1,8 +1,6 @@
 import Image from "next/image";
 import screenshot from "../public/images/screenshot1.webp";
 import tape from "../public/images/trailer-tape1.webp";
-import classNames from "classnames";
-import styles from "./Splatlands.module.scss";
 import Button from "./Button";
 import graffiti1 from "../public/images/graffiti1.webp";
 import graffiti2 from "../public/images/graffiti2.webp";
@@ -10,12 +8,7 @@ import graffiti2 from "../public/images/graffiti2.webp";
 const Splatlands = () => {
   return (
     <article className="container-none mx-auto max-w-[1500px] flex flex-col gap-[20px]">
-      <section
-        className={classNames(
-          "relative flex w-[90%] px-[5%] mx-auto gap-[5%] md:flex-col sm:w-[95%] sm:px-none",
-          styles.fooFont
-        )}
-      >
+      <section className="fooFont relative flex w-[90%] px-[5%] mx-auto gap-[5%] md:flex-col sm:w-[95%] sm:px-none">
         <div className="absolute w-[60%] bottom-[-40%] right-[-20%]">
           <Image src={graffiti1} alt="graffiti" />
         </div>
@@ -27,7 +20,7 @@ const Splatlands = () => {
             <span className="text-white text-7xl sm:text-5xl">SPLATLANDS</span>
           </h2>
           <div className="mt-[-20px] px-[15%] pt-[10%] pb-[10%] flex flex-col gap-[30px] rounded-lg text-center leading-9 bg-black sm:px-[5%]">
-            <p className="text-white text-xl">
+            <p className="text-white text-xl font-sans2">
               Enter a sun-scorched desert inhabited by battle-hardened Inklings
               and Octolings. Ink, dive, swim, and splat your way to the top!
             </p>

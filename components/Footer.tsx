@@ -47,7 +47,6 @@ const Footer = () => {
       Composite = Matter.Composite,
       Composites = Matter.Composites,
       Constraint = Matter.Constraint,
-      Mouse = Matter.Mouse,
       Bodies = Matter.Bodies;
 
     // create engine
@@ -84,14 +83,15 @@ const Footer = () => {
       function (x: number, y: number) {
         return Bodies.rectangle(x, y, 1, 1, {
           collisionFilter: { group },
+          render: { visible: false },
         });
       }
     );
 
     Composites.chain(ropeB, 0, 0, 0, 0, {
-      stiffness: 0.5,
+      stiffness: 0.2,
       length: 0,
-      render: { type: "line" },
+      render: { visible: false },
     });
 
     Composite.add(world, [
@@ -117,7 +117,7 @@ const Footer = () => {
       mousePos.x = e.offsetX;
       mousePos.y = e.offsetY;
       console.log(mousePos.y);
-      if (mousePos.y > 320 || mousePos.y < 285) {
+      if (mousePos.y > 450 || mousePos.y < 150) {
         bb.collisionFilter.group = group;
       } else {
         bb.collisionFilter.group = undefined;
@@ -148,10 +148,10 @@ const Footer = () => {
     Composite.add(world, mc2);
 
     // add mouse control
-    const mouse = Mouse.create(render.canvas);
+    // const mouse = Mouse.create(render.canvas);
 
     // keep the mouse in sync with rendering
-    render.mouse = mouse;
+    // render.mouse = mouse;
 
     const posUpdate = () => {
       setBodyPos([...ropeB.bodies.map((b) => b.position)]);
@@ -181,7 +181,7 @@ const Footer = () => {
   }, [innerWidth]);
 
   return (
-    <footer className="relative container-none pt-[50%] bg-[url('/images/bg-footer.jpeg')] bg-[length:1200px_800px]">
+    <div className="relative container-none ">
       <div className="rotate-180">
         <canvas
           ref={canvasRef}
@@ -189,7 +189,7 @@ const Footer = () => {
           height="500"
           className="opacity-0 absolute top-0"
         ></canvas>
-        <div className="w-full h-[500px] pointer-events-none ">
+        <div className="w-full h-[0px] pointer-events-none ">
           <svg className="w-full h-[500px] ">
             <path
               className="water"
@@ -215,21 +215,19 @@ const Footer = () => {
           </svg>
         </div>
       </div>
-      <div className="relative w-full h-[200px] mt-[-560px] mb-[140px]"></div>
-      <div className="relative h-[500px]">
+      <footer className="relative bg-red">
         <div className="relative flex w-[240px] sm:w-[90%] mx-auto">
           <Button width="lg">
-            <div className="absolute pt-1 pb-3 px-10 text-2xl bg-neonGreen rounded-lg font-sans border-neonGreen border-[2px] border-solid w-full">
-              Dive in {">"}
+            <div className="absolute pt-1 pb-3 px-10 text-2xl bg-purple text-neonGreen rounded-lg font-sans border-purple border-[2px] border-solid w-full">
+              Game updates {">"}
             </div>
-            <div className="relative pt-1 pb-3 px-10 text-2xl bg-purple rounded-lg font-sans border-purple border-[2px] border-solid text-white transition-all delay-500 hover:border-white hover:delay-200">
-              Dive in {">"}
+            <div className="relative pt-1 pb-3 px-10 text-2xl bg-neonGreen text-purple rounded-lg font-sans border-neonGreen border-[2px] border-solid transition-all delay-500 hover:border-purple hover:delay-200">
+              Game updates {">"}
             </div>
           </Button>
         </div>
-        <div className="w-full bg-[#000] h-[500px] mt-[100px]"></div>
-      </div>
-    </footer>
+      </footer>
+    </div>
   );
 };
 

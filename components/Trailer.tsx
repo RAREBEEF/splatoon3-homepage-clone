@@ -25,7 +25,7 @@ const Trailer = () => {
 
       <h2
         className={classNames(
-          "absolute h-fit w-fit text-center bg-red font-sans text-[3.5vw] left-0 right-0 top-[-10%] mx-auto pt-1 pb-3 px-5"
+          "absolute h-fit w-fit text-center bg-red font-sans text-4xl left-0 right-0 top-[-10%] mx-auto pt-3 pb-5 px-10 rotate-[-6deg] md:text-3xl md:pt-2 md:pb-4 sm:text-2xl"
         )}
       >
         Watch the trailer

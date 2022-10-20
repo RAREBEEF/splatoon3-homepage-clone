@@ -1,6 +1,7 @@
 import News from "./News";
 import Splatlands from "./Splatlands";
 import Trailer from "./Trailer";
+import Twitter from "./Twitter";
 
 const Description = () => {
   return (
@@ -16,6 +17,7 @@ const Description = () => {
         <div className="w-[110%] h-[60px] translate-x-[-5%] rotate-[-1deg] bg-[url('/images/banner-green.png')] bg-cover"></div>
       </div>
       <News />
+      <Twitter />
     </main>
   );
 };

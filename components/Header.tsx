@@ -40,7 +40,7 @@ const Header = () => {
           "absolute w-[30%] top-[45%] left-[75%] md:top-[55%] md:left-[65%] sm:top-[40%] sm:left-[80%]"
         )}
       >
-        <Image src={char1} alt="Splatoon character" />
+        <Image src={char1} alt="Inkling" />
       </div>
       <div
         className={classNames(
@@ -48,7 +48,7 @@ const Header = () => {
           "absolute w-[15%] top-[40%] left-[-3%] md:top-[45%] sm:w-[25%] sm:top-[25%]"
         )}
       >
-        <Image src={char2} alt="Splatoon character" />
+        <Image src={char2} alt="Octoling" />
       </div>
       <div
         className={classNames(
@@ -56,7 +56,7 @@ const Header = () => {
           "absolute w-[20%] top-[50%] left-[28%] md:top-[55%] md:left-[27%] sm:w-[35%] sm:top-[35%] sm:left-[35%]"
         )}
       >
-        <Image src={char3} alt="Splatoon character" />
+        <Image src={char3} alt="Octoling" />
       </div>
       <div
         className={classNames(
@@ -64,7 +64,7 @@ const Header = () => {
           "absolute w-[75%] top-[1%] left-[7%] md:top-[20%] sm:w-[110%] sm:top-[6%] sm:left-[10%]"
         )}
       >
-        <Image src={char4} alt="Splatoon character" />
+        <Image src={char4} alt="Inkling" />
       </div>
 
       <div
