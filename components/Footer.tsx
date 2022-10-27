@@ -259,7 +259,7 @@ const Footer = () => {
 
       <footer className="relative flex flex-col gap-y-[20px] w-full mt-[-200px] pt-[20px] pb-[50px] px-[20%] mx-auto bg-[#000] text-xs text-white text-center md:px-[5%] sm:mt-[-150px]">
         <div>
-          <div className="absolute hidden w-[120%] bottom-[100%] left-0 right-[10%] mx-auto mb-[-10px] sm:block">
+          <div className="absolute hidden w-[120%] bottom-[100%] left-0 translate-x-[-10%] mx-auto mb-[-10px] sm:block">
             <Image src={wave} alt="" />
           </div>
           <div
