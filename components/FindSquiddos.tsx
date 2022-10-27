@@ -9,7 +9,7 @@ const FindSquiddos = () => {
   return (
     <article className="container-none mx-auto flex justify-evenly items-center gap-[50px] pt-[10%] px-[5%] pb-[25%] bg-[url('/images/bgs/FindSquiddos-bg.jpeg')] bg-[length:1200px_800px] lg:pb-[35%] md:pb-[55%] sm:flex-col">
       <section className="z-20 basis-[30%] text-center text-white font-sans2 text-xl flex flex-col gap-[20px] md:basis-[60%] md:text-lg sm:order-2">
-        <Image src={myNintendo} alt="My Nintendo" />
+        <Image src={myNintendo} alt="My Nintendo" placeholder="blur" />
         <h2 className="fooFont text-neonGreen text-5xl">DIDYA KNOW?</h2>
         <p>
           Find these squiddos around the site to dive a little deeper into the
@@ -153,16 +153,16 @@ const FindSquiddos = () => {
       </section>
       <section className="z-10 relative basis-[35%] md:basis-[30%] md:mt-[10%] sm:order-1 sm:mt-0 sm:w-[85%] sm:mx-auto sm:left-[5%]">
         <div className="absolute w-[90%] top-[10%] left-[-15%] rotate-45">
-          <Image src={splatNeonGreen} alt="splat" />
+          <Image src={splatNeonGreen} alt="splat" placeholder="blur" />
         </div>
         <div className="absolute w-[90%] top-[20%] left-[-15%] rotate-[-45deg]">
-          <Image src={splatNeonGreen} alt="splat" />
+          <Image src={splatNeonGreen} alt="splat" placeholder="blur" />
         </div>
         <div className="absolute w-[70%] top-[-20%] left-[-15%]">
-          <Image src={squid} alt="Octopus" />
+          <Image src={squid} alt="Octopus" placeholder="blur" />
         </div>
         <div className="relative w-[80%] ml-[20%] mt-[10%]">
-          <Image src={character} alt="Octoring" />
+          <Image src={character} alt="Octoring" placeholder="blur" />
         </div>
       </section>
     </article>

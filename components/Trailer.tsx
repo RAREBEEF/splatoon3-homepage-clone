@@ -13,16 +13,16 @@ const Trailer = () => {
     <div className="container-none relative mx-auto mx-[20%] mt-[-150px] md:mx-[15%] relative sm:mx-auto">
       <div className="w-[90%] bg-white border-[10px] border-white rounded-sm mx-auto rotate-2">
         <div>
-          <Image src={thumb} alt="trailer" />
+          <Image src={thumb} alt="trailer" priority placeholder="blur"/>
         </div>
       </div>
 
       <div className="absolute w-[15%] top-[-5%] left-0 rotate-[-30deg]">
-        <Image src={tape1} alt="tape" />
+        <Image src={tape1} alt="tape"placeholder="blur" />
       </div>
 
       <div className="absolute w-[15%] bottom-0 right-[3%] rotate-[-30deg]">
-        <Image src={tape2} alt="tape" />
+        <Image src={tape2} alt="tape" placeholder="blur"/>
       </div>
 
       <h2

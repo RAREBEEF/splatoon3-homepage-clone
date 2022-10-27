@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <header className="container-none relative">
       <div className="absolute left-0 bottom-[-30%] w-[30%] md:hidden">
-        <Image src={splatRed} alt="splat" />
+        <Image src={splatRed} alt="splat" placeholder="blur" />
       </div>
       <picture>
         <source
@@ -45,7 +45,7 @@ const Header = () => {
           "absolute w-[30%] top-[45%] left-[75%] md:top-[55%] md:left-[65%] sm:top-[40%] sm:left-[80%]"
         )}
       >
-        <Image src={character1} alt="Inkling" />
+        <Image src={character1} alt="Inkling" priority placeholder="blur" />
       </div>
       <div
         className={classNames(
@@ -53,7 +53,7 @@ const Header = () => {
           "absolute w-[15%] top-[40%] left-[-3%] md:top-[45%] sm:w-[25%] sm:top-[25%]"
         )}
       >
-        <Image src={character2} alt="Octoling" />
+        <Image src={character2} alt="Octoling" priority placeholder="blur" />
       </div>
       <div
         className={classNames(
@@ -61,7 +61,7 @@ const Header = () => {
           "absolute w-[20%] top-[50%] left-[28%] md:top-[55%] md:left-[27%] sm:w-[35%] sm:top-[35%] sm:left-[35%]"
         )}
       >
-        <Image src={character3} alt="Octoling" />
+        <Image src={character3} alt="Octoling" priority placeholder="blur" />
       </div>
       <div
         className={classNames(
@@ -69,7 +69,7 @@ const Header = () => {
           "absolute w-[75%] top-[1%] left-[7%] md:top-[20%] sm:w-[110%] sm:top-[6%] sm:left-[10%]"
         )}
       >
-        <Image src={character4} alt="Inkling" />
+        <Image src={character4} alt="Inkling" priority placeholder="blur" />
       </div>
 
       <div
@@ -78,7 +78,7 @@ const Header = () => {
           "absolute w-[50%] top-[1%] left-[-10%] sm:w-[70%]"
         )}
       >
-        <Image src={effect} alt="Paint effect" />
+        <Image src={effect} alt="Paint effect" priority placeholder="blur" />
       </div>
 
       <div className="absolute top-0 right-[5%] my-auto right-0 w-[630px] h-[550px] md:w-[400px] md:h-[400px] md:bottom-auto sm:w-[75%] sm:h-[50%] sm:bottom-0 sm:top-auto sm:left-0 sm:mx-auto">
@@ -88,7 +88,7 @@ const Header = () => {
             "w-[80%] absolute bottom-[10%] right-0 sm:w-[50%] sm:bottom-[-5%]"
           )}
         >
-          <Image src={splat} alt="splat" />
+          <Image src={splat} alt="splat" placeholder="blur" />
         </div>
         <div
           className={classNames(
@@ -96,7 +96,7 @@ const Header = () => {
             "w-[50%] absolute bottom-[10%] left-0 sm:w-[40%] sm:bottom-[-5%]"
           )}
         >
-          <Image src={splat} alt="splat" />
+          <Image src={splat} alt="splat" placeholder="blur" />
         </div>
         <div
           className={classNames(
@@ -104,7 +104,7 @@ const Header = () => {
             "absolute w-full top-[5%] sm:top-0"
           )}
         >
-          <Image src={logo} alt="Splatoon 3" />
+          <Image src={logo} alt="Splatoon 3" priority placeholder="blur" />
         </div>
 
         <div
@@ -114,7 +114,7 @@ const Header = () => {
           )}
         >
           <div className="absolute w-[250px] top-[65%] bottom-0 left-0 right-0 m-auto rotate-3 sm:w-[270px] sm:top-[40%]">
-            <Image src={tape} alt="Tape" />
+            <Image src={tape} alt="Tape" placeholder="blur" />
           </div>
           <div className="max-w-[200px] mx-auto sm:max-w-[300px]">
             <Button

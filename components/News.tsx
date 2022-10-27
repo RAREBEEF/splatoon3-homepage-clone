@@ -129,10 +129,10 @@ const News = () => {
             </svg>
           </div>
           <div className="absolute w-[35%] left-[5%] bottom-[105%] rotate-[-12deg]">
-            <Image src={banner3} alt="banner3" />
+            <Image src={banner3} alt="banner3" placeholder="blur"/>
           </div>
           <div className="">
-            <Image src={news.thumb} alt={news.content} />
+            <Image src={news.thumb} alt={news.content} placeholder="blur"/>
           </div>
 
           <p className="text-2xl font-medium mt-[7%] font-sans2 md:text-xl">
@@ -151,10 +151,10 @@ const News = () => {
 
           <div className="absolute bottom-[3%] w-full left-0 right-0 mx-auto">
             <div className="absolute left-[5%] bottom-0 w-[20%]">
-              <Image src={staple2} alt="staple" />
+              <Image src={staple2} alt="staple" placeholder="blur"/>
             </div>
             <div className="absolute right-[5%] bottom-0 w-[10%]">
-              <Image src={staple1} alt="staple" />
+              <Image src={staple1} alt="staple" placeholder="blur"/>
             </div>
           </div>
         </li>
@@ -273,14 +273,14 @@ const News = () => {
           animationStart ? "opacity-100" : "opacity-0"
         }`}
       >
-        <Image src={splatRed} alt="spalt" />
+        <Image src={splatRed} alt="spalt" placeholder="blur"/>
       </div>
       <div className="relative rotate-[-3deg] mb-[60px] w-fit mx-auto">
         <div className="absolute w-[100%] top-[-20%] right-[-5%] rotate-2">
-          <Image src={banner1} alt="banner" />
+          <Image src={banner1} alt="banner" placeholder="blur"/>
         </div>
         <div className="absolute w-[100%] bottom-[-40%] left-[-5%]">
-          <Image src={banner2} alt="banner" />
+          <Image src={banner2} alt="banner" placeholder="blur"/>
         </div>
         <h2 className="relative fooFont py-4 px-14 rounded-lg bg-white text-black text-5xl md:text-3xl">
           NEWS AND UPDATES

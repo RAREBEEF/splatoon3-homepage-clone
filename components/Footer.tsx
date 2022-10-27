@@ -267,14 +267,14 @@ const Footer = () => {
               footerAnimationStart ? "opacity-100" : "opacity-0"
             }`}
           >
-            <Image src={sticker1} alt="Sticker" />
+            <Image src={sticker1} alt="Sticker" placeholder="blur" />
           </div>
           <div
             className={`absolute w-[150px] right-[5%] top-[15%] rotate-12 transtion-all duration-700 delay-500 md:hidden ${
               footerAnimationStart ? "opacity-100" : "opacity-0"
             }`}
           >
-            <Image src={sticker2} alt="Sticker" />
+            <Image src={sticker2} alt="Sticker" placeholder="blur" />
           </div>
 
           <div
@@ -282,14 +282,14 @@ const Footer = () => {
               footerAnimationStart ? "opacity-100" : "opacity-0"
             }`}
           >
-            <Image src={splatPurple} alt="Splat" />
+            <Image src={splatPurple} alt="Splat" placeholder="blur" />
           </div>
           <div
             className={`absolute w-[200px] left-[5%] bottom-[-80px] rotate-[-12deg] transtion-all duration-700 delay-100 md:bottom-[-120px] sm:hidden ${
               footerAnimationStart ? "opacity-100" : "opacity-0"
             }`}
           >
-            <Image src={splatNeonGreen} alt="Splat" />
+            <Image src={splatNeonGreen} alt="Splat" placeholder="blur" />
           </div>
 
           <div
@@ -297,14 +297,14 @@ const Footer = () => {
               footerAnimationStart ? "opacity-100" : "opacity-0"
             }`}
           >
-            <Image src={splatPurple} alt="Splat" />
+            <Image src={splatPurple} alt="Splat" placeholder="blur" />
           </div>
           <div
             className={`absolute w-[250px] right-0 bottom-[100px] rotate-12 md:w-[150px] transtion-all duration-700 delay-300 sm:hidden ${
               footerAnimationStart ? "opacity-100" : "opacity-0"
             }`}
           >
-            <Image src={splatNeonGreen} alt="Splat" />
+            <Image src={splatNeonGreen} alt="Splat" placeholder="blur" />
           </div>
         </div>
         <div className="w-[230px] mx-auto sm:w-full">
@@ -341,22 +341,42 @@ const Footer = () => {
             <ul className="flex justify-center gap-[20px]">
               <li className="w-[50px]">
                 <a className="cursor-pointer">
-                  <Image src={facebook} alt="Facebook" layout="responsive" />
+                  <Image
+                    src={facebook}
+                    alt="Facebook"
+                    layout="responsive"
+                    placeholder="blur"
+                  />
                 </a>
               </li>
               <li className="w-[50px]">
                 <a className="cursor-pointer">
-                  <Image src={twitter} alt="Twitter" layout="responsive" />
+                  <Image
+                    src={twitter}
+                    alt="Twitter"
+                    layout="responsive"
+                    placeholder="blur"
+                  />
                 </a>
               </li>
               <li className="w-[50px]">
                 <a className="cursor-pointer">
-                  <Image src={youtube} alt="Youtube" layout="responsive" />
+                  <Image
+                    src={youtube}
+                    alt="Youtube"
+                    layout="responsive"
+                    placeholder="blur"
+                  />
                 </a>
               </li>
               <li className="w-[50px]">
                 <a className="cursor-pointer">
-                  <Image src={instagram} alt="Youtube" layout="responsive" />
+                  <Image
+                    src={instagram}
+                    alt="Youtube"
+                    layout="responsive"
+                    placeholder="blur"
+                  />
                 </a>
               </li>
             </ul>
@@ -371,6 +391,7 @@ const Footer = () => {
                   width="60"
                   height="90"
                   layout="fixed"
+                  placeholder="blur"
                 />
               </div>
               <div className="grow flex items-center justify-center px-[10px]">
@@ -385,6 +406,7 @@ const Footer = () => {
                   width="67"
                   height="90"
                   layout="fixed"
+                  placeholder="blur"
                 />
               </div>
             </a>
