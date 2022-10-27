@@ -10,10 +10,19 @@ import Splatlands from "../components/Splatlands";
 import Trailer from "../components/Trailer";
 import Twitter from "../components/Twitter";
 import _ from "lodash";
+import Head from "next/head";
 
 const Home: NextPage = () => {
   return (
     <main className="container-none overflow relative flex flex-col bg-[url('/images/bgs/index-bg.jpeg')] bg-[length:1200px_800px]">
+      <Head>
+        <title>Splatoon™ 3 for Nintendo Switch™ – Official Site</title>
+        <meta
+          name="description"
+          content="Enter the Splatlands! Ink your way to the top in online modes like Turf War and Salmon Run. Discover the mysteries of story mode. Only on the Nintendo Switch™ family of systems."
+        />
+        <meta name="author" content="RAREBEEF" />
+      </Head>
       <Header />
       <div className="w-screen relative h-fit pt-[20px] translate-y-[-80px] pt-[60px]">
         <Banner color={["yellow", "green"]} />

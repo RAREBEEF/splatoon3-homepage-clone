@@ -9,7 +9,6 @@ import Image from "next/image";
 import Button from "./Button";
 import { useEffect, useRef, useState } from "react";
 import useScrollTrigger from "../hooks/useScrollTrigger";
-import classNames from "classnames";
 
 const GetTheGame = () => {
   const squidRef = useRef<HTMLDivElement>(null);
@@ -62,7 +61,7 @@ const GetTheGame = () => {
           <Image src={octo} alt="Octo" />
         </div>
       </section>
-      <section className="flex flex-col justify-center basis-[40%] pt-[5%] text-white text-center sm:w-fit sm:mx-auto">
+      <section className="flex flex-col justify-center basis-[40%] pt-[5%] text-white text-center sm:w-[90%] sm:mx-auto">
         <h2 className="fooFont text-7xl md:text-5xl mb-[20px] rotate-[-4deg]">
           <div className="text-neonGreen text-5xl md:text-3xl mb-[-5px]">
             GET

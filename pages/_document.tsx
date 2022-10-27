@@ -4,10 +4,8 @@ const Document = () => {
   return (
     <Html>
       <Head>
-        <link
-          rel="stylesheet"
-          href="https://use.typekit.net/rhb8lay.css"
-        ></link>
+        <link rel="stylesheet" href="https://use.typekit.net/rhb8lay.css" />
+        <link rel="icon" href="/icons/favicon.svg" />
       </Head>
       <body>
         <Main />
