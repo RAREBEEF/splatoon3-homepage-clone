@@ -17,6 +17,7 @@
 }
 
 .button {
+  cursor: pointer;
   animation: bounce 2s linear infinite;
   @keyframes bounce {
     0% {

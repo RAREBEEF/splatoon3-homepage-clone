@@ -1,19 +1,21 @@
 import styles from "./News.module.scss";
 import classNames from "classnames";
-import banner1 from "../public/images/banner-news1.webp";
-import banner2 from "../public/images/banner-news2.webp";
-import news1 from "../public/images/news1.png";
-import news2 from "../public/images/news2.jpeg";
-import news3 from "../public/images/news3.png";
-import news4 from "../public/images/news4.jpeg";
-import news5to6 from "../public/images/news5.jpeg";
+import splatRed from "../public/images/etc/splat-red.png";
+import banner1 from "../public/images/banners/banner-news1.webp";
+import banner2 from "../public/images/banners/banner-news2.webp";
+import news1 from "../public/images/news/slide-item1.png";
+import news2 from "../public/images/news/slide-item2.jpeg";
+import news3 from "../public/images/news/slide-item3.png";
+import news4 from "../public/images/news/slide-item4.jpeg";
+import news5to6 from "../public/images/news/slide-item5to6.jpeg";
 import Image, { StaticImageData } from "next/image";
-import statple1 from "../public/images/staple-news2.webp";
-import statple2 from "../public/images/staple-news.webp";
-import sticker from "../public/images/sticker-news.webp";
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { gsap, Power1 } from "gsap";
+import staple2 from "../public/images/etc/staple2.webp";
+import staple1 from "../public/images/etc/staple.webp";
+import banner3 from "../public/images/banners/banner-news3.webp";
+import React, { useEffect, useRef, useState } from "react";
+import { gsap, Power1, Power4 } from "gsap";
 import _ from "lodash";
+import useScrollTrigger from "../hooks/useScrollTrigger";
 
 const NewsList: Array<{ thumb: StaticImageData; content: string }> = [
   {
@@ -46,11 +48,22 @@ const NewsList: Array<{ thumb: StaticImageData; content: string }> = [
 ];
 
 const News = () => {
+  const containerRef = useRef<HTMLElement>(null);
+  const [animationStart, setAnimationStart] = useState<boolean>(false);
   const slideContainerRef = useRef<HTMLUListElement>(null);
   const slideItemRefs = useRef<Array<any>>([]);
+  const [innerWidth, setInnerWidth] = useState<number>(0);
   const [page, setPage] = useState<number>(0);
   const [showLeftButton, setShowLeftButton] = useState<boolean>(false);
   const [showRightButton, setShowRightButton] = useState<boolean>(true);
+  const [gsaps, setGsaps] = useState<Array<any>>([]);
+  const scrollTrigger = useScrollTrigger();
+
+  useEffect(() => {
+    scrollTrigger(containerRef, () => {
+      setAnimationStart(true);
+    });
+  }, [scrollTrigger, animationStart]);
 
   const itemAnimation = (
     el: HTMLUListElement | EventTarget,
@@ -62,12 +75,11 @@ const News = () => {
       delay: random * 0.01,
     });
 
-    timeline.to(el, {
+    timeline.from(el, {
       rotate: 0,
       duration: 0,
       ease: Power1.easeInOut,
     });
-
     for (let i = 0; i < 3; i++) {
       random *= 2 / 3;
       timeline.to(el, {
@@ -82,12 +94,13 @@ const News = () => {
         ease: Power1.easeInOut,
       });
     }
-
     timeline.to(el, {
       rotate: 0,
       duration: 0.25,
       ease: Power1.easeInOut,
     });
+
+    setGsaps((prev) => [...prev, timeline]);
   };
 
   const slideItems = () => {
@@ -116,13 +129,13 @@ const News = () => {
             </svg>
           </div>
           <div className="absolute w-[35%] left-[5%] bottom-[105%] rotate-[-12deg]">
-            <Image src={sticker} alt="sticker" />
+            <Image src={banner3} alt="banner3" />
           </div>
           <div className="">
             <Image src={news.thumb} alt={news.content} />
           </div>
 
-          <p className="text-lg mt-[7%] font-sans2">
+          <p className="text-2xl font-medium mt-[7%] font-sans2 md:text-xl">
             {news.content}
           </p>
 
@@ -138,10 +151,10 @@ const News = () => {
 
           <div className="absolute bottom-[3%] w-full left-0 right-0 mx-auto">
             <div className="absolute left-[5%] bottom-0 w-[20%]">
-              <Image src={statple1} alt="staple" />
+              <Image src={staple2} alt="staple" />
             </div>
             <div className="absolute right-[5%] bottom-0 w-[10%]">
-              <Image src={statple2} alt="staple" />
+              <Image src={staple1} alt="staple" />
             </div>
           </div>
         </li>
@@ -152,94 +165,117 @@ const News = () => {
   /**
    * 인자로 전달한 수(1, -1)만큼 페이지 수를 더한다.
    */
-  const checkAndAddPage = useCallback(
-    (add: 1 | 0 | -1) => {
-      // 업데이트 할 페이지
-      let nextPage = page + add;
+  const checkAndAddPage = (add: 1 | 0 | -1) => {
+    // 업데이트 할 페이지
+    let nextPage = page + add;
 
-      // 전체 페이지 길이
-      const pageLength =
-        window.innerWidth >= 640 ? NewsList.length / 2 : NewsList.length;
+    // 전체 페이지 길이
+    const pageLength =
+      innerWidth >= 640 ? NewsList.length / 2 : NewsList.length;
 
-      // 업데이트 할 페이지가 범위 내인지 체크
-      if (nextPage < 0) {
-        nextPage = 0;
-      } else if (nextPage > pageLength) {
-        nextPage = pageLength - 1;
-      }
+    // 업데이트 할 페이지가 범위 내인지 체크
+    if (nextPage < 0) {
+      nextPage = 0;
+    } else if (nextPage > pageLength) {
+      nextPage = pageLength - 1;
+    }
 
-      // 업데이트 될 페이지가 양 끝일 경우 버튼 비활성화
-      if (nextPage === pageLength - 1) {
-        setShowRightButton(false);
-      } else setShowRightButton(true);
+    // 업데이트 될 페이지가 양 끝일 경우 버튼 비활성화
+    if (nextPage === pageLength - 1) {
+      setShowRightButton(false);
+    } else setShowRightButton(true);
 
-      if (nextPage === 0) {
-        setShowLeftButton(false);
-      } else setShowLeftButton(true);
+    if (nextPage === 0) {
+      setShowLeftButton(false);
+    } else setShowLeftButton(true);
 
-      // 페이지 상태 업데이트
-      setPage(nextPage);
-    },
-    [page]
-  );
+    // 페이지 상태 업데이트
+    setPage(nextPage);
+  };
 
-  const onRightClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onRightButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
+    gsaps.forEach((timeline) => {
+      timeline.kill();
+    });
+    setGsaps([]);
+
+    slideItemRefs.current.forEach((el) => {
+      itemAnimation(el, false);
+    });
+
     checkAndAddPage(1);
   };
 
   const onLeftClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
+    gsaps.forEach((timeline) => {
+      timeline.kill();
+    });
+    setGsaps([]);
+
+    slideItemRefs.current.forEach((el) => {
+      itemAnimation(el, true);
+    });
+
     checkAndAddPage(-1);
   };
 
   /**
    * 슬라이드 페이지에 맞춰 스크롤 업데이트
    */
-  const scrollUpdate = useCallback(() => {
+  useEffect(() => {
     const slideContainer = slideContainerRef.current;
     if (!slideContainer || !window) return;
 
-    const innerWidth = window.innerWidth;
-    const currentX = slideContainer.scrollLeft;
     const moveX =
-      (window.innerWidth / 100) *
+      (innerWidth / 100) *
       (innerWidth < 640 ? 90 : innerWidth < 1024 ? 75 : 60);
 
     const nextX = moveX * page;
 
-    slideContainer.scrollTo({
-      left: nextX,
-      behavior: "smooth",
+    gsap.to(slideContainer, {
+      duration: 0.75,
+      translateX: -nextX,
+      ease: Power4.easeInOut,
     });
+  }, [page, innerWidth]);
 
-    slideItemRefs.current.forEach((el) => {
-      itemAnimation(el, currentX > nextX);
-    });
-  }, [page]);
-
-  /****** 스와이프 페이지 변경 시 scrollUpdate 호출 ******/
+  /****** 리사이즈 시 width 상태 업데이트 ******/
   useEffect(() => {
-    scrollUpdate();
-  }, [scrollUpdate]);
+    setInnerWidth(window.innerWidth);
 
-  /****** 리사이즈 시 스와이프 재정렬 ******/
-  useEffect(() => {
-    const onWindowResizeListener = () => {
-      checkAndAddPage(0);
-      scrollUpdate();
+    const onWindowResizeListener = (e: Event) => {
+      const target = e.target as Window;
+
+      setInnerWidth(target.innerWidth);
     };
 
-    window.addEventListener("resize", onWindowResizeListener);
+    window.addEventListener("resize", _.debounce(onWindowResizeListener, 500));
 
     return () => {
-      window.removeEventListener("resize", onWindowResizeListener);
+      window.removeEventListener(
+        "resize",
+        _.debounce(onWindowResizeListener, 500)
+      );
     };
-  }, [checkAndAddPage, page, scrollUpdate]);
+  }, []);
 
   return (
-    <article className="container-none relative mx-auto mt-[-100px]">
-      <div className="rotate-[-3deg] mb-[60px] w-fit mx-auto">
+    <article
+      ref={containerRef}
+      className="container-none relative mx-auto mt-[50px]"
+    >
+      <div
+        className={`absolute left-0 top-0 w-[30%] transition-opacity duration-700 md:left-[-30%] md:w-[50%] sm:hidden ${
+          animationStart ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <Image src={splatRed} alt="spalt" />
+      </div>
+      <div className="relative rotate-[-3deg] mb-[60px] w-fit mx-auto">
         <div className="absolute w-[100%] top-[-20%] right-[-5%] rotate-2">
           <Image src={banner1} alt="banner" />
         </div>
@@ -263,13 +299,13 @@ const News = () => {
 
       <ul
         ref={slideContainerRef}
-        className="pt-[10%] px-[20%] flex overflow-hidden w-screen min-w-[320px] md:px-[12.5%] md:pt-[15%] sm:px-[5%] sm:pt-[25%]"
+        className="pt-[10%] pb-[10%] mb-[-10%] px-[20%] flex w-screen min-w-full md:px-[12.5%] md:pt-[15%] sm:px-[5%] sm:pt-[25%]"
       >
         {slideItems()}
       </ul>
 
-      <div className="absolute pointer-events-none top-0 bottom-0 my-auto pt-[10%] w-full flex justify-between items-center md:pt-[20%] sm:pt-[25%]">
-        <div className="hover:scale-[1.2]">
+      <div className="absolute pointer-events-none top-[10%] bottom-0 my-auto pt-[10%] w-full flex justify-between items-center md:pt-[20%] sm:pt-[25%]">
+        <div className="hover:scale-[1.2] cursor-pointer">
           <button
             onClick={onLeftClick}
             className={classNames(
@@ -277,11 +313,16 @@ const News = () => {
               "relative w-[85px] h-[85px] p-[20px] m-[20px] bg-mint rounded-full md:w-[50px] md:h-[50px] md:p-[10px]",
               showLeftButton
                 ? "opacity-100 pointer-events-auto"
-                : "pointer-events-none opacity-0 cursor-default"
+                : "opacity-0 pointer-events-none"
             )}
           >
-            <div>
-              <svg aria-hidden="true" role="img" viewBox="0 0 40 40">
+            <div className="cursor-pointer">
+              <svg
+                className="cursor-pointer"
+                aria-hidden="true"
+                role="img"
+                viewBox="0 0 40 40"
+              >
                 <path
                   fill="#000"
                   d="M35.718 7.193a1.464 1.464 0 0 1-2.058 0l-.856-.853a1.464 1.464 0 0 0-2.058 0l-.9.896a1.464 1.464 0 0 1-2.058 0l-.9-.896a1.464 1.464 0 0 0-2.058 0l-.735.732a1.464 1.464 0 0 1-2.058 0l-.762-.758a1.45 1.45 0 0 1 0-2.05l.9-.896a1.45 1.45 0 0 0 0-2.049l-.9-.896a1.464 1.464 0 0 0-2.058 0L.424 19.139a1.45 1.45 0 0 0 0 2.049L18.89 39.577a1.463 1.463 0 0 0 2.057 0l.9-.896a1.45 1.45 0 0 0 0-2.05l-.9-.895a1.45 1.45 0 0 1 0-2.05l.883-.879a1.464 1.464 0 0 1 2.057 0l.9.897a1.464 1.464 0 0 0 2.058 0l.9-.897a1.464 1.464 0 0 1 2.058 0l.9.897a1.465 1.465 0 0 0 2.058 0l.9-.896a1.463 1.463 0 0 1 2.057 0l.9.896a1.464 1.464 0 0 0 2.057 0l.9-.897a1.45 1.45 0 0 0 0-2.05l-3.857-3.841a1.45 1.45 0 0 1 0-2.05l3.858-3.841a1.45 1.45 0 0 0 0-2.05l-.699-.695-1.13-1.125-1.129-1.125-.9-.896a1.45 1.45 0 0 1 0-2.05l3.858-3.842a1.45 1.45 0 0 0 0-2.049l-.9-.896a1.463 1.463 0 0 0-2.058 0l-.9.896Z"
@@ -291,19 +332,24 @@ const News = () => {
           </button>
         </div>
 
-        <div className="rotate-180 hover:scale-[1.2]">
+        <div className="rotate-180 hover:scale-[1.2] cursor-pointer">
           <button
-            onClick={onRightClick}
+            onClick={onRightButtonClick}
             className={classNames(
               styles.button,
               "relative w-[85px] h-[85px] p-[20px] m-[20px] bg-mint rounded-full md:w-[50px] md:h-[50px] md:p-[10px]",
               showRightButton
                 ? "opacity-100 pointer-events-auto"
-                : "pointer-events-none opacity-0 cursor-default"
+                : "opacity-0 pointer-events-none"
             )}
           >
-            <div>
-              <svg aria-hidden="true" role="img" viewBox="0 0 40 40">
+            <div className="cursor-pointer">
+              <svg
+                className="cursor-pointer"
+                aria-hidden="true"
+                role="img"
+                viewBox="0 0 40 40"
+              >
                 <path
                   fill="#000"
                   d="M35.718 7.193a1.464 1.464 0 0 1-2.058 0l-.856-.853a1.464 1.464 0 0 0-2.058 0l-.9.896a1.464 1.464 0 0 1-2.058 0l-.9-.896a1.464 1.464 0 0 0-2.058 0l-.735.732a1.464 1.464 0 0 1-2.058 0l-.762-.758a1.45 1.45 0 0 1 0-2.05l.9-.896a1.45 1.45 0 0 0 0-2.049l-.9-.896a1.464 1.464 0 0 0-2.058 0L.424 19.139a1.45 1.45 0 0 0 0 2.049L18.89 39.577a1.463 1.463 0 0 0 2.057 0l.9-.896a1.45 1.45 0 0 0 0-2.05l-.9-.895a1.45 1.45 0 0 1 0-2.05l.883-.879a1.464 1.464 0 0 1 2.057 0l.9.897a1.464 1.464 0 0 0 2.058 0l.9-.897a1.464 1.464 0 0 1 2.058 0l.9.897a1.465 1.465 0 0 0 2.058 0l.9-.896a1.463 1.463 0 0 1 2.057 0l.9.896a1.464 1.464 0 0 0 2.057 0l.9-.897a1.45 1.45 0 0 0 0-2.05l-3.857-3.841a1.45 1.45 0 0 1 0-2.05l3.858-3.841a1.45 1.45 0 0 0 0-2.05l-.699-.695-1.13-1.125-1.129-1.125-.9-.896a1.45 1.45 0 0 1 0-2.05l3.858-3.842a1.45 1.45 0 0 0 0-2.049l-.9-.896a1.463 1.463 0 0 0-2.058 0l-.9.896Z"

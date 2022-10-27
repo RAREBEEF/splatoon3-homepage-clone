@@ -28,4 +28,34 @@ html {
 
 .container-none {
   min-width: 350px;
+  max-width: 1920px;
+}
+
+.overflow {
+  overflow: hidden;
+}
+
+.beforeTranslateXRotate {
+  transform: translateX(100%) rotate(45deg);
+}
+.afterTranslateXRotate {
+  transform: translateX(0) rotate(0);
+}
+
+.beforeTranslateYOpacity {
+  transform: translateY(100px);
+  opacity: 0;
+}
+.afterTranslateYOpacity {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.beforeScaleOpacity {
+  transform: scale(0);
+  opacity: 0;
+}
+.afterScaleOpacity {
+  transform: scale(1);
+  opacity: 1;
 }

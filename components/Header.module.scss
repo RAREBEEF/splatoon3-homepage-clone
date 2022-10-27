@@ -1,4 +1,4 @@
-.char1 {
+.character1 {
   opacity: 0;
   transform: translateX(200px);
 
@@ -16,7 +16,7 @@
   }
 }
 
-.char2 {
+.character2 {
   opacity: 0;
   transform: translateX(200px);
 
@@ -34,7 +34,7 @@
   }
 }
 
-.char3 {
+.character3 {
   opacity: 0;
   transform: translateX(-200px);
 
@@ -52,7 +52,7 @@
   }
 }
 
-.char4 {
+.character4 {
   opacity: 0;
   transform: translateX(-200px);
 
@@ -70,7 +70,7 @@
   }
 }
 
-.logo {
+.splat1 {
   opacity: 0;
   transform: scale(0.3);
 
@@ -88,11 +88,47 @@
   }
 }
 
+.splat2 {
+  opacity: 0;
+  transform: scale(0.3);
+
+  animation: fade-in-5 0.3s 1.75s ease-in-out forwards;
+  @keyframes fade-in-5 {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+.logo {
+  opacity: 0;
+  transform: scale(0.3);
+
+  animation: fade-in-5 0.3s 1.9s ease-in-out forwards;
+  @keyframes fade-in-5 {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
 .button {
   opacity: 0;
   transform: scale(0.3);
 
-  animation: fade-in-6 0.3s 1.75s ease-in-out forwards;
+  animation: fade-in-6 0.3s 2s ease-in-out forwards;
   @keyframes fade-in-6 {
     0% {
       opacity: 0;
@@ -110,7 +146,7 @@
   opacity: 0;
   transform: translateX(-200px) rotate(-20deg);
 
-  animation: fade-in-7 0.3s 2s ease-in-out forwards;
+  animation: fade-in-7 0.3s 2.15s ease-in-out forwards;
   @keyframes fade-in-7 {
     0% {
       opacity: 0;

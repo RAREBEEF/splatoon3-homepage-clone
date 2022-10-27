@@ -1,14 +1,16 @@
 import Image from "next/image";
-import thumb from "../public/images/trailer-thumb.webp";
-import tape1 from "../public/images/trailer-tape1.webp";
-import tape2 from "../public/images/trailer-tape2.webp";
-import play from "../public/images/play.svg";
+import thumb from "../public/images/etc/trailer-thumb.webp";
+import tape1 from "../public/images/etc/tape1.webp";
+import tape2 from "../public/images/etc/tape2.webp";
+import left from "../public/images/etc/trailer-left.svg";
+import right from "../public/images/etc/trailer-right.svg";
+import play from "../public/images/icons/play.svg";
 import styles from "./Trailer.module.scss";
 import classNames from "classnames";
 
 const Trailer = () => {
   return (
-    <div className="container-none mx-auto max-w-[800px] md:mx-[15%] relative absolute top-[-0.5%] sm:mt-[20%] sm:mx-auto">
+    <div className="container-none relative mx-auto mx-[20%] mt-[-150px] md:mx-[15%] relative sm:mx-auto">
       <div className="w-[90%] bg-white border-[10px] border-white rounded-sm mx-auto rotate-2">
         <div>
           <Image src={thumb} alt="trailer" />
@@ -25,10 +27,16 @@ const Trailer = () => {
 
       <h2
         className={classNames(
-          "absolute h-fit w-fit text-center bg-red font-sans text-4xl left-0 right-0 top-[-10%] mx-auto pt-3 pb-5 px-10 rotate-[-6deg] md:text-3xl md:pt-2 md:pb-4 sm:text-2xl"
+          "absolute flex items-center h-[70px] w-fit text-center bg-red font-sans text-4xl left-0 right-0 top-[-10%] mx-auto px-10 rotate-[-6deg] md:text-3xl sm:text-2xl sm:h-[50px]"
         )}
       >
-        Watch the trailer
+        <div className="absolute right-[100%] translate-x-[1px] w-[34px] sm:w-[25px]">
+          <Image src={left} alt="" layout="responsive" />
+        </div>
+        <span className="mb-3 sm:mb-2">Watch the trailer</span>
+        <div className="absolute left-[100%] translate-x-[-1px] w-[32px] sm:w-[23px]">
+          <Image src={right} alt="" layout="responsive" />
+        </div>
       </h2>
 
       <button
@@ -39,7 +47,11 @@ const Trailer = () => {
       >
         <div className={styles.blob}>
           <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <path fill="black" transform="translate(100 100)">
+            <path
+              fill="black"
+              transform="translate(100 100)"
+              d="M55.2,-57.3C67.9,-42.4,72.3,-21.2,70.6,-1.7C68.9,17.8,61.1,35.5,48.3,49.7C35.5,63.9,17.8,74.5,0.6,73.9C-16.6,73.3,-33.2,61.5,-48.7,47.4C-64.3,33.2,-78.9,16.6,-80.5,-1.6C-82,-19.7,-70.6,-39.4,-55,-54.3C-39.4,-69.2,-19.7,-79.3,0.7,-80C21.2,-80.7,42.4,-72.1,55.2,-57.3Z"
+            >
               <animate
                 attributeName="d"
                 dur="5s"
