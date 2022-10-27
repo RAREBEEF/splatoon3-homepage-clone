@@ -341,42 +341,22 @@ const Footer = () => {
             <ul className="flex justify-center gap-[20px]">
               <li className="w-[50px]">
                 <a className="cursor-pointer">
-                  <Image
-                    src={facebook}
-                    alt="Facebook"
-                    layout="responsive"
-                    placeholder="blur"
-                  />
+                  <Image src={facebook} alt="Facebook" layout="responsive" />
                 </a>
               </li>
               <li className="w-[50px]">
                 <a className="cursor-pointer">
-                  <Image
-                    src={twitter}
-                    alt="Twitter"
-                    layout="responsive"
-                    placeholder="blur"
-                  />
+                  <Image src={twitter} alt="Twitter" layout="responsive" />
                 </a>
               </li>
               <li className="w-[50px]">
                 <a className="cursor-pointer">
-                  <Image
-                    src={youtube}
-                    alt="Youtube"
-                    layout="responsive"
-                    placeholder="blur"
-                  />
+                  <Image src={youtube} alt="Youtube" layout="responsive" />
                 </a>
               </li>
               <li className="w-[50px]">
                 <a className="cursor-pointer">
-                  <Image
-                    src={instagram}
-                    alt="Youtube"
-                    layout="responsive"
-                    placeholder="blur"
-                  />
+                  <Image src={instagram} alt="Youtube" layout="responsive" />
                 </a>
               </li>
             </ul>
@@ -391,7 +371,6 @@ const Footer = () => {
                   width="60"
                   height="90"
                   layout="fixed"
-                  placeholder="blur"
                 />
               </div>
               <div className="grow flex items-center justify-center px-[10px]">
@@ -406,7 +385,6 @@ const Footer = () => {
                   width="67"
                   height="90"
                   layout="fixed"
-                  placeholder="blur"
                 />
               </div>
             </a>

@@ -9,7 +9,7 @@ const FindSquiddos = () => {
   return (
     <article className="container-none mx-auto flex justify-evenly items-center gap-[50px] pt-[10%] px-[5%] pb-[25%] bg-[url('/images/bgs/FindSquiddos-bg.jpeg')] bg-[length:1200px_800px] lg:pb-[35%] md:pb-[55%] sm:flex-col">
       <section className="z-20 basis-[30%] text-center text-white font-sans2 text-xl flex flex-col gap-[20px] md:basis-[60%] md:text-lg sm:order-2">
-        <Image src={myNintendo} alt="My Nintendo" placeholder="blur" />
+        <Image src={myNintendo} alt="My Nintendo" />
         <h2 className="fooFont text-neonGreen text-5xl">DIDYA KNOW?</h2>
         <p>
           Find these squiddos around the site to dive a little deeper into the
