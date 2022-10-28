@@ -33,11 +33,11 @@ const Splatlands = () => {
     <article className="container-none mx-auto max-w-[1500px] flex flex-col gap-[20px] mt-[100px] sm:mt-[80px]">
       <section className="fooFont relative flex w-[90%] px-[5%] mx-auto gap-[5%] md:flex-col sm:w-[95%] sm:px-non">
         <div className="absolute w-[60%] bottom-[-40%] right-[-40%]">
-          <Image src={graffiti1} alt="graffiti" placeholder="blur" />
+          <Image src={graffiti1} alt="graffiti" />
         </div>
         <div className="grow relative">
           <div className="absolute left-[-30%] top-[-10%] w-[50%] md:w-[20%] md:left-[-10%]">
-            <Image src={splatOrange} alt="splat" placeholder="blur" />
+            <Image src={splatOrange} alt="splat" />
           </div>
           <h2 className="relative z-20 w-fit mx-auto rotate-[-5deg] text-orange text-5xl text-center sm:text-3xl">
             INK UP THE
@@ -58,26 +58,26 @@ const Splatlands = () => {
         </div>
         <div className="relative z-10 basis-[120%]">
           <div className="absolute left-[-10%] bottom-[-30%] w-[120%] rotate-[-20deg] md:w-[40%] md:right-[10%] md:left-auto md:bottom-[-50%] sm:hidden">
-            <Image src={splatMorePurple} alt="splat" placeholder="blur" />
+            <Image src={splatMorePurple} alt="splat" />
           </div>
           <div className="absolute mx-auto h-fit w-[120%] grow border-[10px] border-white rounded-sm bg-white rotate-2 md:static md:w-[80%] sm:w-[90%]">
             <div>
-              <Image src={screenshot} alt="Splatlands" placeholder="blur" />
+              <Image src={screenshot} alt="Splatlands" priority />
             </div>
           </div>
           <div className="absolute w-[30%] right-[20%] top-[-5%] md:top-[-12%] md:right-0 md:left-0 md:mx-auto">
-            <Image src={tape} alt="tape" placeholder="blur" />
+            <Image src={tape} alt="tape" />
           </div>
         </div>
       </section>
 
       <section className="relative z-20 flex col-2 w-[90%] mt-[200px] mx-auto px-[5%] gap-[5%] md:w-[95%] md:px-0 sm:flex-col sm:col-1 sm:mt-[120px]">
         <div className="absolute w-[60%] bottom-[-40%] right-[-5%] sm:bottom-[-15%]">
-          <Image src={graffiti2} alt="graffiti" placeholder="blur" />
+          <Image src={graffiti2} alt="graffiti" />
         </div>
         <div className="relative basis-[100%] pt-[5%] pb-[3%] flex flex-col gap-5 items-center rotate-[-2deg] md:mb-[10%] sm:px-[5%] sm:pt-[8%]">
           <div className="absolute left-[-25%] top-[-20%] w-[50%] rotate-180 md:w-[40%] md:left-0 md:top-[-20%]">
-            <Image src={splatNeonGreen} alt="splat" placeholder="blur" />
+            <Image src={splatNeonGreen} alt="splat" />
           </div>
           <div
             ref={firstBoxRef}
@@ -121,7 +121,7 @@ const Splatlands = () => {
               <source src="/videos/howtoplay.mp4"></source>
             </video>
             <div className="absolute w-[30%] top-[-10%] left-0 right-0 mx-auto">
-              <Image src={tape} alt="tape" placeholder="blur" />
+              <Image src={tape} alt="tape" />
             </div>
           </div>
           <div
@@ -191,7 +191,7 @@ const Splatlands = () => {
               <source src="/videos/weapons.mp4"></source>
             </video>
             <div className="absolute w-[30%] top-[-10%] left-0 right-0 mx-auto">
-              <Image src={tape} alt="tape" placeholder="blur" />
+              <Image src={tape} alt="tape" />
             </div>
           </div>
           <div

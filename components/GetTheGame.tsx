@@ -25,13 +25,13 @@ const GetTheGame = () => {
     <article className="container-none relative flex justify-center sm:flex-col sm:gap-y-[150px] pt-[10%] pb-[30%] sm:mt-[-30%]">
       <div>
         <div className="absolute z-0 w-[40%] top-[-25%] left-[40%] sm:hidden">
-          <Image src={splatPurple} alt="splat" placeholder="blur" />
+          <Image src={splatPurple} alt="splat" />
         </div>
         <div className="absolute z-0 w-[30%] bottom-0 right-[-15%] sm:hidden">
-          <Image src={splatNeonGreen} alt="splat" placeholder="blur" />
+          <Image src={splatNeonGreen} alt="splat" />
         </div>
         <div className="absolute w-[400px] rotate-[25deg] left-[45%] bottom-[-5%] md:w-[250px] sm:w-[150px] sm:left-[50%] sm:bottom-[-2%]">
-          <Image src={smile} alt="graffiti" placeholder="blur" />
+          <Image src={smile} alt="graffiti" />
         </div>
       </div>
       <section className="relative basis-[60%]">
@@ -40,25 +40,25 @@ const GetTheGame = () => {
             <Image src={splatPurple} alt="splat" />
           </div>
           <div className="absolute z-0 w-[70%] top-[-15%] left-[20%] md:w-[50%] md:left-[25%] md:top-[-10%] sm:w-[40%] sm:top-[10%]">
-            <Image src={splatNeonGreen} alt="splat" placeholder="blur" />
+            <Image src={splatNeonGreen} alt="splat" />
           </div>
           <div className="absolute z-0 top-[110%] left-[40%] sm:top-[80%] sm:left-[20%]">
             <div className="relative z-0 w-[50%] rotate-180">
-              <Image src={splatNeonGreen} alt="splat" placeholder="blur" />
+              <Image src={splatNeonGreen} alt="splat" />
             </div>
             <div className="absolute z-0 w-[30%] top-[40%] left-[25%]">
-              <Image src={splatNeonGreen} alt="splat" placeholder="blur" />
+              <Image src={splatNeonGreen} alt="splat" />
             </div>
           </div>
         </div>
         <div className="absolute w-[35%] left-[20%] top-[50%] rotate-[-6deg] sm:left-[10%]">
-          <Image src={game} alt="game pack" placeholder="blur" />
+          <Image src={game} alt="game pack" priority />
         </div>
         <div className="relative w-[75%] left-[25%] sm:w-[90%] sm:right-[-10%] sm:left-auto">
-          <Image src={char} alt="Inkling" placeholder="blur" />
+          <Image src={char} alt="Inkling" priority />
         </div>
         <div className="absolute w-[50%] right-[-15%] top-[60%] sm:right-0 sm:bottom-[-30%]">
-          <Image src={octo} alt="Octo" placeholder="blur" />
+          <Image src={octo} alt="Octo" priority />
         </div>
       </section>
       <section className="flex flex-col justify-center basis-[40%] pt-[5%] text-white text-center sm:w-[90%] sm:mx-auto">
@@ -83,7 +83,7 @@ const GetTheGame = () => {
       </section>
       <div className="absolute bottom-0 hidden ml-[20%] sm:block">
         <div className="absolute w-[40%] top-[-10%] left-[-10%]">
-          <Image src={splatPurple} alt="splat" placeholder="blur" />
+          <Image src={splatPurple} alt="splat" />
         </div>
         <div
           ref={squidRef}
@@ -95,7 +95,7 @@ const GetTheGame = () => {
                 : "beforeTranslateXRotate"
             }`}
         >
-          <Image src={squid} alt="squid" placeholder="blur" />
+          <Image src={squid} alt="squid" />
         </div>
       </div>
     </article>

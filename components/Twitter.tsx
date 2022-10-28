@@ -23,30 +23,30 @@ const Twitter = () => {
       <div className="flex w-full justify-evenly pr-[100px] md:flex-col md:pr-0">
         <div className="flex items-center w-[800px] md:w-[55%] md:mx-auto sm:w-[80%]">
           <div className="absolute left-0 w-[40%] top-[15%] left-[-15%] md:left-0 md:top-[10%] md:w-[30%]">
-            <Image src={splatMint} alt="splat" placeholder="blur" />
+            <Image src={splatMint} alt="splat" />
           </div>
           <div className="hidden md:block absolute w-[30%] right-0 top-[20%] sm:hidden">
-            <Image src={splatMint} alt="splat" placeholder="blur" />
+            <Image src={splatMint} alt="splat" />
           </div>
           <div className="relative h-fit">
             <div className="absolute top-[-10%] left-0 right-0 mx-auto w-[60%] md:left-0 md:right-auto">
-              <Image src={graffiti1} alt="Graffiti" placeholder="blur" />
+              <Image src={graffiti1} alt="Graffiti" priority />
             </div>
             <div className="absolute top-[10%] right-[-7%] w-[15%] md:w-[30%] md:right-[-10%]">
-              <Image src={graffiti2} alt="Graffiti" placeholder="blur" />
+              <Image src={graffiti2} alt="Graffiti" priority />
             </div>
             <div className="relative z-10 mt-[40%] right-[-20%] w-[100%] md:right-0 md:w-[120%] md:mt-[20%]">
-              <Image src={character} alt="Octoling" placeholder="blur" />
+              <Image src={character} alt="Octoling" priority />
             </div>
           </div>
         </div>
 
         <div className="relative flex flex-col gap-y-[35px] items-center md:gap-y-[15px]">
           <div className="absolute w-[100%] top-[15%] right-[-50%] md:w-[30%] md:top-[20%] md:right-0 sm:right-[-15%]">
-            <Image src={splatMint} alt="splat" placeholder="blur" />
+            <Image src={splatMint} alt="splat" />
           </div>
           <div className="absolute rotate-180 z-0 w-[60%] bottom-[-5%] left-[-30%] md:w-[30%] md:bottom-[10%] md:left-[5%] sm:left-[-15%]">
-            <Image src={splatMint} alt="splat" placeholder="blur" />
+            <Image src={splatMint} alt="splat" />
           </div>
           <h2 className="relative fooFont text-center text-5xl md:text-3xl">
             <div>SQUID RESEARCH</div>
@@ -54,7 +54,7 @@ const Twitter = () => {
           </h2>
 
           <div className="relative z-20 max-w-[620px] w-[40vw] bg-black rounded-lg md:w-[70%] sm:w-[90%]">
-            <div className="border-[10px] border-white border-solid rounded-lg rounded-b-none">
+            <div className="border-[10px] border-white border-solid rounded-lg rounded-b-none text-white text-2xl font-bold">
               <a
                 className="twitter-timeline"
                 data-height="785"
@@ -67,8 +67,9 @@ const Twitter = () => {
                 async
                 src="https://platform.twitter.com/widgets.js"
                 charSet="utf-8"
+                defer
               ></script>
-              <div className="absolute top-[100%] left-0 right-0 mx-auto">
+              <div className="absolute top-[100%] translate-y-[-1px] left-0 right-0 mx-auto">
                 <Image src={frame} alt="" />
               </div>
             </div>

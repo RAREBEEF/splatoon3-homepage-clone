@@ -47,16 +47,16 @@ const Hardware = () => {
     <article className="container-none relative pt-[8%] pb-[8%] sm:pt-[15%]">
       <div>
         <div className="absolute w-[25%] top-[-10%] left-[-10%] sm:left-[5%] sm:top-[15%] sm:w-[35%]">
-          <Image src={splatOrange} alt="splat" placeholder="blur" />
+          <Image src={splatOrange} alt="splat" />
         </div>
         <div className="absolute w-[35%] top-[30%] left-[-15%] sm:left-[5%] sm:top-[30%] sm:w-[45%]">
-          <Image src={graffiti} alt="splat" placeholder="blur" />
+          <Image src={graffiti} alt="splat" />
         </div>
         <div className="absolute w-[20%] top-[20%] right-[10%] sm:right-[-5%] sm:top-[15%] sm:w-[15%]">
-          <Image src={splatOrange} alt="splat" placeholder="blur" />
+          <Image src={splatOrange} alt="splat" />
         </div>
         <div className="absolute rotate-180 w-[30%] bottom-[-5%] right-[-10%] sm:right-[7%] sm:bottom-[25%] sm:w-[50%]">
-          <Image src={splatMorePurple} alt="splat" placeholder="blur" />
+          <Image src={splatMorePurple} alt="splat" />
         </div>
       </div>
       <h2
@@ -92,7 +92,7 @@ const Hardware = () => {
                 : "beforeScaleOpacity"
             }`}
           >
-            <Image src={basic} alt="Nintendo Switch" placeholder="blur" />
+            <Image src={basic} alt="Nintendo Switch" priority />
           </div>
           <div
             className={`basis-[35%] my-auto transition-all duration-500 ease-in-out delay-100 sm:order-1 sm:w-[80%] sm:mx-auto sm:mb-[5%] ${
@@ -101,7 +101,7 @@ const Hardware = () => {
                 : "beforeScaleOpacity"
             }`}
           >
-            <Image src={oled} alt="Nintendo Switch OLED" placeholder="blur" />
+            <Image src={oled} alt="Nintendo Switch OLED" priority />
           </div>
           <div
             className={`basis-[25%] my-auto transition-all duration-500 ease-in-out delay-300 sm:order-3 sm:w-[55%] sm:mx-auto ${
@@ -110,7 +110,7 @@ const Hardware = () => {
                 : "beforeScaleOpacity"
             }`}
           >
-            <Image src={light} alt="Nintendo Switch Light" placeholder="blur" />
+            <Image src={light} alt="Nintendo Switch Light" priority />
           </div>
         </div>
         <p
