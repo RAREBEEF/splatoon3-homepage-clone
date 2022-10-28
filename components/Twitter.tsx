@@ -59,7 +59,7 @@ const Twitter = () => {
           </h2>
 
           <div className="relative z-20 max-w-[620px] w-[40vw] bg-black rounded-lg md:w-[70%] sm:w-[90%]">
-            <div className="border-[10px] border-white border-solid rounded-lg rounded-b-none text-white text-2xl font-bold">
+            <div className="h-[785px] border-[10px] border-white border-solid rounded-lg rounded-b-none text-white text-2xl font-bold">
               <a
                 className="twitter-timeline"
                 data-height="785"

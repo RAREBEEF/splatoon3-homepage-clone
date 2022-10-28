@@ -18,14 +18,6 @@ const Hardware = () => {
   const [hardwareAnimationStart, setHardwareAnimationStart] =
     useState<boolean>(false);
 
-  const descriptionRef = useRef<HTMLParagraphElement>(null);
-  const [descriptionAnimationStart, setdescriptionAnimationStart] =
-    useState<boolean>(false);
-
-  const buttonRef = useRef<HTMLDivElement>(null);
-  const [buttonAnimationStart, setButtonAnimationStart] =
-    useState<boolean>(false);
-
   const scrollTrigger = useScrollTrigger();
 
   useEffect(() => {
@@ -34,12 +26,6 @@ const Hardware = () => {
     });
     scrollTrigger(hardwareRef, () => {
       setHardwareAnimationStart(true);
-    });
-    scrollTrigger(descriptionRef, () => {
-      setdescriptionAnimationStart(true);
-    });
-    scrollTrigger(buttonRef, () => {
-      setButtonAnimationStart(true);
     });
   }, [scrollTrigger]);
 
@@ -86,7 +72,7 @@ const Hardware = () => {
           className="flex justify-evenly gap-[5%] sm:flex-col sm:w-[60%] sm:mx-auto"
         >
           <div
-            className={`basis-[25%] my-auto transition-all duration-500 ease-in-out delay-200 sm:order-2 sm:w-[65%] sm:mx-auto sm:mb-[5%] ${
+            className={`basis-[25%] my-auto transition-all duration-500 ease-in-out delay-100 sm:order-2 sm:w-[65%] sm:mx-auto sm:mb-[5%] ${
               hardwareAnimationStart
                 ? "afterScaleOpacity"
                 : "beforeScaleOpacity"
@@ -95,7 +81,7 @@ const Hardware = () => {
             <Image src={basic} alt="Nintendo Switch" priority />
           </div>
           <div
-            className={`basis-[35%] my-auto transition-all duration-500 ease-in-out delay-100 sm:order-1 sm:w-[80%] sm:mx-auto sm:mb-[5%] ${
+            className={`basis-[35%] my-auto transition-all duration-500 ease-in-out sm:order-1 sm:w-[80%] sm:mx-auto sm:mb-[5%] ${
               hardwareAnimationStart
                 ? "afterScaleOpacity"
                 : "beforeScaleOpacity"
@@ -104,7 +90,7 @@ const Hardware = () => {
             <Image src={oled} alt="Nintendo Switch OLED" priority />
           </div>
           <div
-            className={`basis-[25%] my-auto transition-all duration-500 ease-in-out delay-300 sm:order-3 sm:w-[55%] sm:mx-auto ${
+            className={`basis-[25%] my-auto transition-all duration-500 ease-in-out delay-200 sm:order-3 sm:w-[55%] sm:mx-auto ${
               hardwareAnimationStart
                 ? "afterScaleOpacity"
                 : "beforeScaleOpacity"
@@ -114,9 +100,8 @@ const Hardware = () => {
           </div>
         </div>
         <p
-          ref={descriptionRef}
-          className={`relative w-[45%] mt-[10%] mb-[3%] mx-auto font-sans2 text-white text-center text-xl transition-all duration-500 ease-in-out md:text-lg md:w-[80%] sm:mb-[5%] sm:w-full ${
-            descriptionAnimationStart
+          className={`relative w-[45%] mt-[10%] mb-[3%] mx-auto font-sans2 text-white text-center text-xl transition-all duration-700 ease-in-out delay-400 md:text-lg md:w-[80%] sm:mb-[5%] sm:w-full ${
+            hardwareAnimationStart
               ? "afterTranslateYOpacity"
               : "beforeTranslateYOpacity"
           }`}
@@ -125,9 +110,8 @@ const Hardware = () => {
           family of systems.
         </p>
         <div
-          ref={buttonRef}
-          className={`w-[300px] sm:w-full mx-auto transition-all duration-500 ease-in-out delay-100 ${
-            buttonAnimationStart ? "afterScaleOpacity" : "beforeScaleOpacity"
+          className={`w-[300px] sm:w-full mx-auto transition-all duration-500 ease-in-out delay-500 ${
+            hardwareAnimationStart ? "afterScaleOpacity" : "beforeScaleOpacity"
           }`}
         >
           <Button

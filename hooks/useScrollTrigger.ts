@@ -28,7 +28,7 @@ const useScrollTrigger = () => {
       const targetY = window.pageYOffset + target.getBoundingClientRect().top;
 
       // 위치에 도달하면 콜백 실행 후 소멸
-      if (targetY <= scrollY + innerHeight) {
+      if (targetY <= scrollY + innerHeight * (2 / 3)) {
         callback();
         window.removeEventListener(
           "scroll",
