@@ -9,6 +9,11 @@ import Button from "./Button";
 const Twitter = () => {
   return (
     <article className="container-none z-10 relative bg-red mt-[-1px] pt-[50px] pb-[100px]">
+      <script
+        async
+        src="https://platform.twitter.com/widgets.js"
+        charSet="utf-8"
+      ></script>
       <svg
         className="absolute top-[100%] translate-y-[-10px] fill-red"
         viewBox="0 0 1450 76"
@@ -63,13 +68,7 @@ const Twitter = () => {
               >
                 Tweets by SplatoonNA
               </a>
-              <script
-                async
-                src="https://platform.twitter.com/widgets.js"
-                charSet="utf-8"
-                defer
-              ></script>
-              <div className="absolute top-[100%] translate-y-[-1px] left-0 right-0 mx-auto">
+              <div className="absolute top-[99%] left-0 right-0 mx-auto">
                 <Image src={frame} alt="" />
               </div>
             </div>

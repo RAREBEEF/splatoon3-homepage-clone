@@ -1,6 +1,5 @@
 # **Splatoon 3 homepage clone coding**
 
-![](https://velog.velcdn.com/images/drrobot409/post/bd47a146-8333-4d4a-b560-ee64995bccba/image.gif)
 <a href="https://splatoon.nintendo.com/">원본 페이지</a>
 <a href="https://splatoon3-clone.netlify.app/">클론 페이지</a>
 
@@ -23,6 +22,14 @@ tailwindcss를 처음 접하고 익숙해질 시간을 갖기 위한 프로젝�
 버튼 애니메이션은 css `clip-path` 속성으로 구현하였다.
 
 같은 내용에 색만 다른 두 개의 요소를 겹쳐놓고 마우스오버 시 `clip-path` 애니메이션을 통해 위의 요소를 지우고 아래의 요소를 보여주는 식으로 진행하였다. 포트폴리오 홈페이지의 첫 화면을 제작할 때 사용했던 방법이어서 왠지 반가웠다.
+
+## **스크롤 애니메이션**
+
+![](https://velog.velcdn.com/images/drrobot409/post/b3ff3a77-ea56-4159-8bc8-1913ea2276cf/image.gif)
+
+스크롤 애니메이션은 ref와 콜백 함수를 인자로 받아서 해당 ref가 뷰포트 하단에 걸치면 콜백 함수를 실행하는 커스텀 훅을 제작해 구현하였다.
+
+콜백으로는 애니메이션 시작을 제어하는 상태의 값을 `true` 로 업데이트 하는 함수를 전달하였다.
 
 ## **배경 & 캐릭터 이미지**
 
