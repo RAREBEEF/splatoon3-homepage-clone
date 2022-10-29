@@ -41,22 +41,6 @@ const Footer = () => {
     .curve(curveNatural);
 
   useEffect(() => {
-    const windowResizeListener = () => {
-      if (!window) return;
-      setInnerWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", _.debounce(windowResizeListener, 500));
-
-    return () => {
-      window.removeEventListener(
-        "resize",
-        _.debounce(windowResizeListener, 500)
-      );
-    };
-  }, []);
-
-  useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -189,9 +173,12 @@ const Footer = () => {
       Runner.stop(runner);
       Composite.clear(engine.world, false);
       Render.stop(render);
+
+      if (!window) return;
+      setInnerWidth(window.innerWidth);
     };
 
-    window.addEventListener("resize", _.debounce(windowResizeListener, 400));
+    window.addEventListener("resize", _.debounce(windowResizeListener, 500));
 
     return () => {
       Engine.clear(engine);
@@ -203,7 +190,7 @@ const Footer = () => {
       canvas.removeEventListener("mouseleave", canvasMouseLeaveListener);
       window.removeEventListener(
         "resize",
-        _.debounce(windowResizeListener, 400)
+        _.debounce(windowResizeListener, 500)
       );
     };
   }, [innerWidth]);

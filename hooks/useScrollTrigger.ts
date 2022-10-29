@@ -46,7 +46,7 @@ const useScrollTrigger = () => {
       );
       window.addEventListener("scroll", _.throttle(windowScrollListener, 200));
     };
-    window.addEventListener("resize", _.debounce(windowResizeListener, 500));
+    window.addEventListener("resize", _.debounce(windowResizeListener, 1000));
   };
 
   return scrollTrigger;
