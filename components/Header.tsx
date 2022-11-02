@@ -18,14 +18,11 @@ const Header = () => {
   const headerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const scrollTrigger = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setAnimationStart(true);
-        });
-      },
-      { threshold: 0.5 }
-    );
+    const scrollTrigger = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) setAnimationStart(true);
+      });
+    });
 
     if (!headerRef.current) return;
     scrollTrigger.observe(headerRef.current);
