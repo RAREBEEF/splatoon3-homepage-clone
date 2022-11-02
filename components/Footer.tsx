@@ -1,4 +1,4 @@
-import Matter, { Vector } from "matter-js";
+import Matter, { Render, Vector } from "matter-js";
 import React, { useEffect, useRef, useState } from "react";
 import { curveNatural, area } from "d3";
 import Button from "./Button";
@@ -15,24 +15,28 @@ import splatNeonGreen from "../public/images/etc/splat-neonGreen.png";
 import splatPurple from "../public/images/etc/splat-purple.png";
 import Image from "next/image";
 import _ from "lodash";
-import useScrollTrigger from "../hooks/useScrollTrigger";
 
 const Footer = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [innerWidth, setInnerWidth] = useState<number>(0);
   const [bodyPos, setBodyPos] = useState<Array<any>>([]);
-
   const footerRef = useRef<HTMLDivElement>(null);
   const [footerAnimationStart, setFooterAnimationStart] =
     useState<boolean>(false);
 
-  const scrollTrigger = useScrollTrigger();
-
   useEffect(() => {
-    scrollTrigger(footerRef, () => {
-      setFooterAnimationStart(true);
-    });
-  }, [scrollTrigger]);
+    const scrollTrigger = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setFooterAnimationStart(true);
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    if (!footerRef.current) return;
+    scrollTrigger.observe(footerRef.current);
+  }, []);
 
   const lineGen = area()
     .x((v: any) => v.x)
@@ -46,7 +50,7 @@ const Footer = () => {
 
     setInnerWidth(window.innerWidth);
 
-    if (innerWidth === 0) return;
+    if (innerWidth <= 640) return;
 
     const Engine = Matter.Engine,
       Render = Matter.Render,
@@ -60,7 +64,6 @@ const Footer = () => {
     // create engine
     const engine = Engine.create(),
       world = engine.world;
-
     engine.gravity.y = 0;
 
     // create renderer

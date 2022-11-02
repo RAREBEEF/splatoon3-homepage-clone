@@ -8,26 +8,29 @@ import splatOrange from "../public/images/etc/splat-orange.png";
 import splatMorePurple from "../public/images/etc/splat-morePurple.png";
 import splatNeonGreen from "../public/images/etc/splat-neonGreen.png";
 import _ from "lodash";
-import React, { useEffect, useRef, useState } from "react";
-import useScrollTrigger from "../hooks/useScrollTrigger";
+import React, { useEffect, useRef } from "react";
+import styles from "./Splatlands.module.scss";
+import classNames from "classnames";
 
 const Splatlands = () => {
   const firstBoxRef = useRef<HTMLDivElement>(null);
   const secondBoxRef = useRef<HTMLDivElement>(null);
-  const [firstAnimationStart, setfirstAnimationStart] =
-    useState<boolean>(false);
-  const [secondAnimationStart, setSecondAnimationStart] =
-    useState<boolean>(false);
-  const scrollTrigger = useScrollTrigger();
 
   useEffect(() => {
-    scrollTrigger(firstBoxRef, () => {
-      setfirstAnimationStart(true);
-    });
-    scrollTrigger(secondBoxRef, () => {
-      setSecondAnimationStart(true);
-    });
-  }, [scrollTrigger]);
+    const scrollTrigger = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add(styles["start"]);
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    if (!firstBoxRef.current) return;
+    scrollTrigger.observe(firstBoxRef.current);
+    if (!secondBoxRef.current) return;
+    scrollTrigger.observe(secondBoxRef.current);
+  }, []);
 
   return (
     <article className="container-none mx-auto max-w-[1500px] flex flex-col gap-[20px] mt-[100px] sm:mt-[80px]">
@@ -75,14 +78,14 @@ const Splatlands = () => {
         <div className="absolute w-[60%] bottom-[-40%] right-[-5%] sm:bottom-[-15%]">
           <Image src={graffiti2} alt="graffiti" />
         </div>
-        <div className="relative basis-[100%] pt-[5%] pb-[3%] flex flex-col gap-5 items-center rotate-[-2deg] md:mb-[10%] sm:px-[5%] sm:pt-[8%]">
+        <div
+          ref={firstBoxRef}
+          className="relative basis-[100%] pt-[5%] pb-[3%] flex flex-col gap-5 items-center rotate-[-2deg] md:mb-[10%] sm:px-[5%] sm:pt-[8%]"
+        >
           <div className="absolute left-[-25%] top-[-20%] w-[50%] rotate-180 md:w-[40%] md:left-0 md:top-[-20%]">
             <Image src={splatNeonGreen} alt="splat" />
           </div>
-          <div
-            ref={firstBoxRef}
-            className="absolute top-0 bottom-0 left-0 right-0 m-auto"
-          >
+          <div className="absolute top-0 bottom-0 left-0 right-0 m-auto">
             <svg
               viewBox="0 0 566 555"
               xmlns="http://www.w3.org/2000/svg"
@@ -97,19 +100,19 @@ const Splatlands = () => {
             </svg>
           </div>
           <h4
-            className={`relative transition-all duration-500 ease-in-out text-4xl font-sans text-white text-center mb-[20px] px-[5%] md:text-2xl md:mb-0 md:px-[3%] sm:px-0 ${
-              firstAnimationStart
-                ? "afterTranslateYOpacity"
-                : "beforeTranslateYOpacity"
-            }`}
+            className={classNames(
+              styles["box__header"],
+              "relative text-4xl font-sans text-white text-center mb-[20px] px-[5%] md:text-2xl md:mb-0 md:px-[3%] sm:px-0"
+            )}
           >
             How to play, game modes, and all that
           </h4>
 
           <div
-            className={`relative mx-[5%] mt-[5%] transition-all duration-500 delay-200 ease-in-out ${
-              firstAnimationStart ? "afterScaleOpacity" : "beforeScaleOpacity"
-            }`}
+            className={classNames(
+              styles["box__video"],
+              "relative mx-[5%] mt-[5%]"
+            )}
           >
             <video
               playsInline
@@ -125,13 +128,10 @@ const Splatlands = () => {
             </div>
           </div>
           <div
-            className={`
-              min-w-[160px] mx-auto sm:w-full transition-all duration-500 delay-200 ease-in-out
-              ${
-                firstAnimationStart
-                  ? "afterTranslateYOpacity"
-                  : "beforeTranslateYOpacity"
-              }`}
+            className={classNames(
+              styles["box__btn"],
+              "min-w-[160px] mx-auto sm:w-full"
+            )}
           >
             <Button
               bgColor={["neonGreen", "purple"]}
@@ -162,24 +162,19 @@ const Splatlands = () => {
             </svg>
           </div>
           <h4
-            className={`relative transition-all duration-500 ease-in-out text-4xl font-sans text-center mb-[20px] px-[5%] md:text-2xl md:mb-0 md:px-[3%] sm:px-0
-             ${
-               secondAnimationStart
-                 ? "afterTranslateYOpacity"
-                 : "beforeTranslateYOpacity"
-             }`}
+            className={classNames(
+              styles["box__header"],
+              "relative text-4xl font-sans text-center mb-[20px] px-[5%] md:text-2xl md:mb-0 md:px-[3%] sm:px-0"
+            )}
           >
             Make a splash with the latest weapons and gear
           </h4>
 
           <div
-            className={`relative mx-[5%] mt-[5%] transition-all duration-500 delay-200 ease-in-out
-              ${
-                secondAnimationStart
-                  ? "afterScaleOpacity"
-                  : "beforeScaleOpacity"
-              }
-            `}
+            className={classNames(
+              styles["box__video"],
+              "relative mx-[5%] mt-[5%]"
+            )}
           >
             <video
               playsInline
@@ -195,12 +190,10 @@ const Splatlands = () => {
             </div>
           </div>
           <div
-            className={`min-w-[160px] mx-auto sm:w-full transition-all duration-500 delay-200 ease-in-out
-              ${
-                secondAnimationStart
-                  ? "afterTranslateYOpacity"
-                  : "beforeTranslateYOpacity"
-              }`}
+            className={classNames(
+              styles["box__btn"],
+              "min-w-[160px] mx-auto sm:w-full"
+            )}
           >
             <Button
               bgColor={["purple", "neonGreen"]}

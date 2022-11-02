@@ -1,0 +1,50 @@
+.header {
+  transition: all 0.5s ease-in-out;
+  opacity: 0;
+  transform: scale(0);
+  &.start {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.hardware-wrapper {
+  & > div {
+    transition: all 0.5s ease-in-out;
+    opacity: 0;
+    transform: scale(0);
+
+    &:first-child {
+      transition-delay: 0.15s;
+    }
+    &:last-child {
+      transition-delay: 0.3s;
+    }
+  }
+
+  &.start > div {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.description-wrapper {
+  & > p,
+  & > div {
+    transition: all 0.5s ease-in-out;
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  & > div {
+    transition-delay: 0.15s;
+  }
+
+  &.start {
+    & > p,
+    & > div {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

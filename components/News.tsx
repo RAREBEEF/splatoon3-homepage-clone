@@ -15,7 +15,6 @@ import banner3 from "../public/images/banners/banner-news3.webp";
 import React, { useEffect, useRef, useState } from "react";
 import { gsap, Power1, Power4 } from "gsap";
 import _ from "lodash";
-import useScrollTrigger from "../hooks/useScrollTrigger";
 
 const NewsList: Array<{ thumb: StaticImageData; content: string }> = [
   {
@@ -49,7 +48,6 @@ const NewsList: Array<{ thumb: StaticImageData; content: string }> = [
 
 const News = () => {
   const containerRef = useRef<HTMLElement>(null);
-  const [animationStart, setAnimationStart] = useState<boolean>(false);
   const slideContainerRef = useRef<HTMLUListElement>(null);
   const slideItemRefs = useRef<Array<any>>([]);
   const [innerWidth, setInnerWidth] = useState<number>(0);
@@ -57,13 +55,20 @@ const News = () => {
   const [showLeftButton, setShowLeftButton] = useState<boolean>(false);
   const [showRightButton, setShowRightButton] = useState<boolean>(true);
   const [gsaps, setGsaps] = useState<Array<any>>([]);
-  const scrollTrigger = useScrollTrigger();
 
   useEffect(() => {
-    scrollTrigger(containerRef, () => {
-      setAnimationStart(true);
-    });
-  }, [scrollTrigger, animationStart]);
+    const scrollTrigger = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add(styles["start"]);
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    if (!containerRef.current) return;
+    scrollTrigger.observe(containerRef.current);
+  }, []);
 
   const itemAnimation = (
     el: HTMLUListElement | EventTarget,
@@ -271,9 +276,10 @@ const News = () => {
       className="container-none relative mx-auto mt-[50px]"
     >
       <div
-        className={`absolute left-0 top-0 w-[30%] transition-opacity duration-700 md:left-[-30%] md:w-[50%] sm:hidden ${
-          animationStart ? "opacity-100" : "opacity-0"
-        }`}
+        className={classNames(
+          styles["container__splat"],
+          "absolute left-0 top-0 w-[30%] transition-opacity duration-700 md:left-[-30%] md:w-[50%] sm:hidden"
+        )}
       >
         <Image src={splatRed} alt="spalt" />
       </div>

@@ -1,0 +1,32 @@
+.box__header,
+.box__video,
+.box__btn {
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+}
+
+.box__header {
+  transform: translateY(-50px);
+}
+
+.box__video,
+.box__btn {
+  transition-delay: 0.2s;
+  transform: scale(0);
+}
+
+.start {
+  .box__header,
+  .box__video,
+  .box__btn {
+    opacity: 1;
+  }
+
+  .box__header {
+    transform: translateY(0);
+  }
+  .box__video,
+  .box__btn {
+    transform: scale(1);
+  }
+}

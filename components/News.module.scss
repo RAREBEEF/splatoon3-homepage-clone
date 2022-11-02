@@ -1,3 +1,14 @@
+.container__splat {
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+}
+
+.start {
+  .container__splat {
+    opacity: 1;
+  }
+}
+
 .hover-animation {
   .arrow {
     transition: all 0.3s;

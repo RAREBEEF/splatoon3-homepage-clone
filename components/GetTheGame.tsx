@@ -7,19 +7,25 @@ import splatPurple from "../public/images/etc/splat-purple.png";
 import splatNeonGreen from "../public/images/etc/splat-neonGreen.png";
 import Image from "next/image";
 import Button from "./Button";
-import { useEffect, useRef, useState } from "react";
-import useScrollTrigger from "../hooks/useScrollTrigger";
+import { useEffect, useRef } from "react";
+import styles from "./GetTheGame.module.scss";
 
 const GetTheGame = () => {
-  const squidRef = useRef<HTMLDivElement>(null);
-  const [animationStart, setAnimationStart] = useState<boolean>(false);
-  const scrollTrigger = useScrollTrigger();
+  const triggerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    scrollTrigger(squidRef, () => {
-      setAnimationStart(true);
-    });
-  }, [scrollTrigger]);
+    const scrollTrigger = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add(styles["start"]);
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    if (!triggerRef.current) return;
+    scrollTrigger.observe(triggerRef.current);
+  }, []);
 
   return (
     <article className="container-none relative flex justify-center sm:flex-col sm:gap-y-[150px] pt-[10%] pb-[30%] sm:mt-[-30%]">
@@ -81,20 +87,14 @@ const GetTheGame = () => {
           </Button>
         </div>
       </section>
-      <div className="absolute bottom-0 hidden ml-[20%] sm:block">
+      <div
+        ref={triggerRef}
+        className="absolute bottom-0 hidden ml-[20%] sm:block"
+      >
         <div className="absolute w-[40%] top-[-10%] left-[-10%]">
           <Image src={splatPurple} alt="splat" />
         </div>
-        <div
-          ref={squidRef}
-          className={`
-            transition-all duration-700 ease-in-out
-            ${
-              animationStart
-                ? "afterTranslateXRotate"
-                : "beforeTranslateXRotate"
-            }`}
-        >
+        <div className={styles["squid"]}>
           <Image src={squid} alt="squid" />
         </div>
       </div>

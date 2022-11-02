@@ -11,22 +11,32 @@ import tape from "../public/images/etc/header-tape.webp";
 import classNames from "classnames";
 import styles from "./Header.module.scss";
 import Button from "./Button";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Header = () => {
-  const [loadEnd, setLoadEnd] = useState<boolean>(false);
+  const [animationStart, setAnimationStart] = useState<boolean>(false);
+  const headerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    window.onload = () => {
-      setLoadEnd(true);
-    };
+    const scrollTrigger = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setAnimationStart(true);
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    if (!headerRef.current) return;
+    scrollTrigger.observe(headerRef.current);
   }, []);
 
   return (
     <header
+      ref={headerRef}
       className={classNames(
         "container-none relative",
-        loadEnd && styles["load-end"]
+        animationStart && styles["load-end"]
       )}
     >
       <div className="absolute left-0 bottom-[-30%] w-[30%] md:hidden">
