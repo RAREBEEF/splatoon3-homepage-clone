@@ -23,7 +23,7 @@ const Splatlands = () => {
           if (entry.isIntersecting) entry.target.classList.add(styles["start"]);
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.7 }
     );
 
     if (!firstBoxRef.current) return;
