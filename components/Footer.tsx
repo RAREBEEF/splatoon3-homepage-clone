@@ -1,6 +1,4 @@
-import Matter, { Render, Vector } from "matter-js";
 import React, { useEffect, useRef, useState } from "react";
-import { curveNatural, area } from "d3";
 import Button from "./Button";
 import facebook from "../public/images/logos/facebook.svg";
 import twitter from "../public/images/logos/twitter.svg";
@@ -15,11 +13,9 @@ import splatNeonGreen from "../public/images/etc/splat-neonGreen.png";
 import splatPurple from "../public/images/etc/splat-purple.png";
 import Image from "next/image";
 import _ from "lodash";
+import Wave from "./Wave";
 
 const Footer = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [innerWidth, setInnerWidth] = useState<number>(0);
-  const [bodyPos, setBodyPos] = useState<Array<any>>([]);
   const footerRef = useRef<HTMLDivElement>(null);
   const [footerAnimationStart, setFooterAnimationStart] =
     useState<boolean>(false);
@@ -27,205 +23,17 @@ const Footer = () => {
   useEffect(() => {
     const scrollTrigger = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setFooterAnimationStart(true);
-        });
+        entries[0].isIntersecting && setFooterAnimationStart(true);
       },
       { threshold: 0.5 }
     );
 
-    if (!footerRef.current) return;
-    scrollTrigger.observe(footerRef.current);
+    footerRef.current && scrollTrigger.observe(footerRef.current);
   }, []);
-
-  const lineGen = area()
-    .x((v: any) => v.x)
-    .y0((v: any) => v.y)
-    .y1(-200)
-    .curve(curveNatural);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    setInnerWidth(window.innerWidth);
-
-    if (innerWidth <= 640) return;
-
-    const Engine = Matter.Engine,
-      Render = Matter.Render,
-      Runner = Matter.Runner,
-      Body = Matter.Body,
-      Composite = Matter.Composite,
-      Composites = Matter.Composites,
-      Constraint = Matter.Constraint,
-      Bodies = Matter.Bodies;
-
-    // create engine
-    const engine = Engine.create(),
-      world = engine.world;
-    engine.gravity.y = 0;
-
-    // create renderer
-    const render = Render.create({
-      canvas: canvas,
-      engine: engine,
-      options: {
-        width: innerWidth,
-      },
-    });
-
-    Render.run(render);
-
-    // create runner
-    const runner = Runner.create();
-    Runner.run(runner, engine);
-
-    // add bodies
-    const group = Body.nextGroup(true);
-
-    const rope = Composites.stack(
-      0,
-      250,
-      innerWidth / 15,
-      1,
-      10,
-      10,
-      function (x: number, y: number) {
-        return Bodies.rectangle(x, y, 1, 1, {
-          collisionFilter: { group },
-          render: { visible: false },
-        });
-      }
-    );
-
-    Composites.chain(rope, 0, 0, 0, 0, {
-      stiffness: 0.2,
-      length: 0,
-      render: { visible: false },
-    });
-
-    Composite.add(world, [
-      rope,
-      Constraint.create({
-        pointA: { x: -100, y: 300 },
-        bodyB: rope.bodies[0],
-        pointB: { x: 0, y: 0 },
-        length: 2,
-        stiffness: 0.9,
-      }),
-      Constraint.create({
-        pointA: { x: innerWidth + 100, y: 300 },
-        bodyB: rope.bodies[rope.bodies.length - 1],
-        pointB: { x: 0, y: 0 },
-        length: 2,
-        stiffness: 0.9,
-      }),
-    ]);
-
-    const mousePos = { x: 0, y: 0 };
-    const canvasMouseMoveListener = (e: any) => {
-      mousePos.x = e.offsetX;
-      mousePos.y = e.offsetY;
-      if (mousePos.y > 400 || mousePos.y < 200) {
-        bb.collisionFilter.group = group;
-      } else {
-        bb.collisionFilter.group = undefined;
-      }
-    };
-
-    const canvasMouseLeaveListener = () => {
-      mousePos.x = 0;
-      mousePos.y = 0;
-    };
-
-    canvas.addEventListener("mousemove", canvasMouseMoveListener);
-    canvas.addEventListener("mouseleave", canvasMouseLeaveListener);
-
-    const bb = Bodies.circle(0, 0, 40, {
-      density: 1,
-      friction: 0,
-      frictionStatic: 1,
-      frictionAir: 0,
-      label: "mouse",
-      render: { visible: false },
-    });
-
-    Composite.add(world, bb);
-
-    const mc2 = Constraint.create({
-      bodyB: bb,
-      pointA: mousePos,
-      pointB: Vector.create(),
-      stiffness: 0.9,
-      damping: 0.7,
-      render: { visible: false },
-    });
-
-    Composite.add(world, mc2);
-
-    const posUpdate = () => {
-      setBodyPos([...rope.bodies.map((b) => b.position)]);
-      requestAnimationFrame(posUpdate);
-    };
-
-    requestAnimationFrame(posUpdate);
-
-    const windowResizeListener = () => {
-      Engine.clear(engine);
-      Runner.stop(runner);
-      Composite.clear(engine.world, false);
-      Render.stop(render);
-
-      if (!window) return;
-      setInnerWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", _.debounce(windowResizeListener, 500));
-
-    return () => {
-      Engine.clear(engine);
-      Runner.stop(runner);
-      Composite.clear(engine.world, false);
-      Render.stop(render);
-
-      canvas.removeEventListener("mousemove", canvasMouseMoveListener);
-      canvas.removeEventListener("mouseleave", canvasMouseLeaveListener);
-      window.removeEventListener(
-        "resize",
-        _.debounce(windowResizeListener, 500)
-      );
-    };
-  }, [innerWidth]);
 
   return (
     <div className="relative container-none">
-      <div className="rotate-180 sm:hidden">
-        <canvas
-          ref={canvasRef}
-          width={innerWidth}
-          height="500"
-          className="opacity-0 absolute top-0"
-        ></canvas>
-        <div className="w-full h-[0px] pointer-events-none ">
-          <svg className="w-full h-[500px] ">
-            <path
-              className="water"
-              // @ts-ignored
-              d={
-                bodyPos.length <= 1
-                  ? ""
-                  : lineGen(bodyPos === undefined ? [[1, 1]] : bodyPos) ===
-                    undefined
-                  ? ""
-                  : lineGen(bodyPos === undefined ? [[1, 1]] : bodyPos)
-              }
-              fill="#000"
-            ></path>
-          </svg>
-        </div>
-      </div>
-
+      <Wave />
       <footer className="relative flex flex-col gap-y-[20px] w-full mt-[-200px] pt-[20px] mx-auto text-xs text-white text-center sm:mt-[-150px] sm:bg-[#000]">
         <div>
           <div className="absolute hidden w-[120%] bottom-[100%] left-0 translate-x-[-10%] mx-auto mb-[-10px] sm:block">

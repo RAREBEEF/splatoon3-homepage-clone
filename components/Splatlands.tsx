@@ -19,17 +19,15 @@ const Splatlands = () => {
   useEffect(() => {
     const scrollTrigger = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add(styles["start"]);
-        });
+        entries
+          .filter((entry) => entry.isIntersecting)
+          .forEach((entry) => entry.target.classList.add(styles["start"]));
       },
       { threshold: 0.7 }
     );
 
-    if (!firstBoxRef.current) return;
-    scrollTrigger.observe(firstBoxRef.current);
-    if (!secondBoxRef.current) return;
-    scrollTrigger.observe(secondBoxRef.current);
+    firstBoxRef.current && scrollTrigger.observe(firstBoxRef.current);
+    secondBoxRef.current && scrollTrigger.observe(secondBoxRef.current);
   }, []);
 
   return (

@@ -16,15 +16,13 @@ const GetTheGame = () => {
   useEffect(() => {
     const scrollTrigger = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add(styles["start"]);
-        });
+        entries[0].isIntersecting &&
+          entries[0].target.classList.add(styles["start"]);
       },
       { threshold: 0.5 }
     );
 
-    if (!triggerRef.current) return;
-    scrollTrigger.observe(triggerRef.current);
+    triggerRef.current && scrollTrigger.observe(triggerRef.current);
   }, []);
 
   return (

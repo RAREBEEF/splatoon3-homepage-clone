@@ -18,19 +18,16 @@ const Hardware = () => {
   useEffect(() => {
     const scrollTrigger = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add(styles["start"]);
-        });
+        entries
+          .filter((entry) => entry.isIntersecting)
+          .forEach((entry) => entry.target.classList.add(styles["start"]));
       },
       { threshold: 0.5 }
     );
 
-    if (!titleRef.current) return;
-    scrollTrigger.observe(titleRef.current);
-    if (!hardwareRef.current) return;
-    scrollTrigger.observe(hardwareRef.current);
-    if (!descriptionRef.current) return;
-    scrollTrigger.observe(descriptionRef.current);
+    titleRef.current && scrollTrigger.observe(titleRef.current);
+    hardwareRef.current && scrollTrigger.observe(hardwareRef.current);
+    descriptionRef.current && scrollTrigger.observe(descriptionRef.current);
   }, []);
 
   return (
