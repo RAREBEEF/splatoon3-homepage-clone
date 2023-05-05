@@ -6,11 +6,16 @@ import graffiti2 from "../public/images/etc/graffiti4.webp";
 import frame from "../public/images/etc/twitter-frame.webp";
 import Button from "./Button";
 import Script from "next/script";
+import { useEffect } from "react";
 
 const Twitter = () => {
+  useEffect(() => {
+    // @ts-ignore
+    if (typeof twttr !== "undefined") twttr.widgets.load();
+  }, []);
+
   return (
     <article className="container-none z-10 relative bg-red mt-[-1px] pt-[50px] pb-[100px]">
-      <Script async src="https://platform.twitter.com/widgets.js" />
       <svg
         className="absolute top-[100%] translate-y-[-10px] fill-red"
         viewBox="0 0 1450 76"
@@ -65,6 +70,7 @@ const Twitter = () => {
               >
                 Tweets by SplatoonNA
               </a>
+              <Script async src="https://platform.twitter.com/widgets.js" />
               <div className="absolute top-[99%] left-0 right-0 mx-auto">
                 <Image src={frame} alt="" />
               </div>
