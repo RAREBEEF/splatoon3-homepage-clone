@@ -5,15 +5,12 @@ import graffiti1 from "../public/images/etc/graffiti3.webp";
 import graffiti2 from "../public/images/etc/graffiti4.webp";
 import frame from "../public/images/etc/twitter-frame.webp";
 import Button from "./Button";
+import Script from "next/script";
 
 const Twitter = () => {
   return (
     <article className="container-none z-10 relative bg-red mt-[-1px] pt-[50px] pb-[100px]">
-      <script
-        async
-        src="https://platform.twitter.com/widgets.js"
-        charSet="utf-8"
-      ></script>
+      <Script async src="https://platform.twitter.com/widgets.js" />
       <svg
         className="absolute top-[100%] translate-y-[-10px] fill-red"
         viewBox="0 0 1450 76"
